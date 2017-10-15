@@ -12,7 +12,14 @@ class ContestInfo extends React.Component{
     render(){
         return(
             <div className='home-section-container'>
-            <h1>赛制说明</h1>
+            <div className='contest-info-title-container'>
+                &nbsp;
+                <p>
+                    <h1>赛制说明</h1>
+                    <h2>Competition Specification</h2>
+                </p>
+                <img src='./src/static/images/contestInfo_title_bg.png' />
+            </div>
 
             </div>
 
