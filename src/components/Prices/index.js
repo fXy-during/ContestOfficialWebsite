@@ -9,7 +9,7 @@ import QueueAnim from 'rc-queue-anim';
 import PriceItem from './subpage';
 import './style.less';
 
-let sm = '';
+let xm = '';
 class Prices extends React.Component{
 
     render(){
