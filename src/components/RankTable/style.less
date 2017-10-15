@@ -1,8 +1,43 @@
-.rank-top-ahead {
-    border-color: #66ccff;
-    &::before {
-        content: '66';
-        position: absolute;
-        right: 20%;
+.rank-top {
+    position: relative;
+    img {
+        width: 50px;
+        height: 40px;
     }
+}
+.rank-top-1 {
+    .rank-top;
+    &::before {
+        content: '1';
+        font-size: 16px;
+        color: #fff;
+        position: absolute;
+        left: 20px;
+        top: -23px;
+    }
+}
+.rank-top-2 {
+    .rank-top;
+    &::before {
+        content: '2';
+        font-size: 16px;
+        color: #fff;
+        position: absolute;
+        left: 20px;
+        top: -23px;
+    }
+}
+.rank-top-3 {
+    .rank-top;
+    &::before {
+        content: '3';
+        font-size: 16px;
+        color: #fff;
+        position: absolute;
+        left: 20px;
+        top: -23px;
+    }
+}
+.rank-top-line {
+    margin-left: 20px;
 }

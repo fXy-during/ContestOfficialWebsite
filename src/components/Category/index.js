@@ -16,9 +16,10 @@ class Category extends React.Component{
     }
     render(){
         return(
-            <div className='category'>
+            <div id='category'>
             <Menu
-              theme='dark'
+              style={{backgroundColor: '#4fbab4', borderBottomColor: '#4fbab4', color: '#fff' }}
+              theme='light'
               onClick={this.handleClick.bind(this)}
               selectedKeys={[this.props.current]}
               mode="horizontal">

@@ -43,7 +43,7 @@ class Rank extends React.Component{
         const { mail, token } = this.props.userinfo;
         return(
             <Layout>
-                <Header id='layout-header'>
+                <Header id='layout-header-diy'>
                     <Head current='rank'/>
                 </Header>
                 <Content>
@@ -65,6 +65,7 @@ class Rank extends React.Component{
         )
     }
 }
+                    
                     // <ContestInfo />
 
 function mapStateToProps(state) {

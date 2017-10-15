@@ -11,7 +11,7 @@ import Banner from '../../components/Banner';
 import TimeLine from '../../components/TimeLine';
 import Prices from '../../components/Prices';
 import Foot from '../../components/Footer';
-import Upload from '../../components/Upload';
+import ContestInfo from '../../components/ContestInfo';
 import createTeam from '../../fetch/createTeam';
 import './style.less';
 
@@ -83,7 +83,7 @@ class Home extends React.Component{
         }]
         return(
             <Layout>
-                <Header id='layout-header'>
+                <Header id='layout-header-diy'>
                     <Head current='home'/>
                 </Header>
                 <Content>
@@ -99,6 +99,7 @@ class Home extends React.Component{
                     </Modal>
 
                     <Banner takeIn={this.handleTakeIn.bind(this)}/>
+                    <ContestInfo />
                     <TimeLine />
                     <Prices prices={prices} />
                 </Content>

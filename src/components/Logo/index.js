@@ -8,7 +8,7 @@ function Logo(props) {
         hashHistory.push('/home');
     }
     return (
-        <img className='header-logo' src='../src/static/images/logo.png' onClick={handleClick}/>
+        <img className='header-logo' src='../src/static/images/logo_latest.png' onClick={handleClick}/>
     )
 }
 

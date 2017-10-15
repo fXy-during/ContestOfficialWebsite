@@ -9,7 +9,7 @@ import QueueAnim from 'rc-queue-anim';
 import PriceItem from './subpage';
 import './style.less';
 
-
+let sm = '';
 class Prices extends React.Component{
 
     render(){
@@ -28,7 +28,7 @@ class Prices extends React.Component{
                           animation={{ delay: 400, type: 'to', ease: 'easeOutQuad' }}
                         >
                             <div className='prices-title'>
-                                <h2>奖品</h2>
+                                <h2>奖品 </h2>
                                 <p>让程序员无法抗拒的奖励</p>
                             </div>
                         </TweenOne>

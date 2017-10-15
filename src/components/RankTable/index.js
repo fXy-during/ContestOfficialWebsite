@@ -21,11 +21,11 @@ class RankTable extends React.Component{
             render: (text, record) => {
               if (text<=3) {
                 return (
-                <span className='rank-top-ahead' >{text}</span>
+                <span className={`rank-top-${text}`} ><img src='./src/static/images/award.png' /></span>
                 )
               } else {
                 return (
-                <span>{text}</span>
+                <span className='rank-top-line'>{text}</span>
                 )
               }
             },
@@ -48,7 +48,6 @@ class RankTable extends React.Component{
         return(
             <div className='home-section-container'>
             <Table
-            size='small'
             pagination={false}
             loading={loading}
             dataSource={data}

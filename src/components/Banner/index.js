@@ -10,8 +10,11 @@ class Logo extends React.Component{
     render(){
         return(
             <div id='content-banner-container'>
-                <img className='content-banner-logo' src='../src/static/images/banner.png'/>
-                <img className='content-banner-text' src='../src/static/images/text.png'/>
+                <img className='content-banner-logo' src='../src/static/images/314684282-01.png'/>
+                <div className='content-banner-text'>
+                    <h1>创数据算法比赛</h1>
+                    <h2>Creating data algorthm contest</h2>
+                </div>
                 <Button className='content-banner-btn' onClick={this.handleClick.bind(this)}>参加比赛</Button>
             </div>
         )
