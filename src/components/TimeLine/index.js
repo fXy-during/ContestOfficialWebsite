@@ -76,7 +76,6 @@ class TimeLine extends React.Component{
 
               </OverPack>
             </div>
-
         )
     }
 }    
