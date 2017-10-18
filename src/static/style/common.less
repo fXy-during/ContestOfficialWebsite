@@ -1,7 +1,8 @@
+@bg-color: #4fbab4;
 #layout-header-diy {
     padding: 0;
     height: auto;
-    background-color: #4fbab4;
+    background-color: @bg-color;
     overflow: hidden;
 }
 .home-section-container {
@@ -25,5 +26,11 @@
             border-bottom-color: rgba(255, 255, 255, .4);
         }
     }
+}
+.ant-layout {
+    min-width: 1360px;
+}
+.ant-anchor-link-active > .ant-anchor-link-title {
+    color: @bg-color;
 }
 

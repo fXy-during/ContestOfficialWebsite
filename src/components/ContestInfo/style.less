@@ -1,3 +1,4 @@
+@text-color: #4fbab4;
 .contest-info-title-container {
     text-align: center;
     position: relative;
@@ -14,13 +15,22 @@
         left: 38%;
         z-index: 999;
         h1 { 
-            color: #4fbab4;
+            color: @text-color;
             font-size: 40px;
         }
         h2 {
             font-weight: normal;
-            color: #4fbab4;
+            color: @text-color;
             font-size: 28px;
         }
     }
+}
+.contest-info-text-container {
+    margin-top: 200px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 2em;
+    color: @text-color;
+
+    // margin: 200px auto;
 }

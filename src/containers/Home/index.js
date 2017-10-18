@@ -55,11 +55,12 @@ class Home extends React.Component{
                 message.error('Bad Gatway');
             } else if(resp.status === 403){
                 console.log(resp.statusText);
+                return resp.json()
             } else {
                 return resp.json()
             }
         }).then(info=>{
-            console.log('createTeam ', info)
+            message.info(info.msg)
         }).catch(ex=>{
             console.log('catch error', ex.message);
         })
@@ -69,17 +70,17 @@ class Home extends React.Component{
             title: 'Alienware17C-R2848',
             rank: 1,
             description: 'i7-7820HK 16G 1TSSD+1T GTX1080 8G独显 QHD (价值33999.00￥)',
-            img: './src/static/images/award_one.jpg',
+            img: '../src/static/images/award_one.jpg',
         },{
             title: 'Alienware  24.5英寸电竞显示器',
             rank: 2,
             description: 'AW2518H G-Sync 240Hz刷新专业游戏电竞显示器 (价值5999.00￥)',
-            img: './src/static/images/award_two.jpg',
+            img: '../src/static/images/award_two.jpg',
         },{
             title: 'Alienware Advanced版 游戏键盘',
             rank: 3,
             description: ' AW568 机械/茶轴游戏键盘(AlienFX灯效 全键无冲 5个宏按键)黑 (价值899.00￥)',
-            img: './src/static/images/award_three.jpg',
+            img: '../src/static/images/award_three.jpg',
         }]
         return(
             <Layout>

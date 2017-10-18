@@ -52,8 +52,8 @@ class Rank extends React.Component{
                         <h1>创数据算法大赛</h1>
                         <h2>排行榜</h2>
                       </p>
-                      <img className='rank-img-bg' src='./src/static/images/info_ahead.png' />
-                      <img className='rank-img-cup' src='./src/static/images/awarkCup.png'/>
+                      <img className='rank-img-bg' src='../src/static/images/info_ahead.png' />
+                      <img className='rank-img-cup' src='../src/static/images/awarkCup.png'/>
                     </div>
                     <RankTable  data={data} loading={!!data.length?false:true}/>
                     <UploadFile mail={mail} token={token} />

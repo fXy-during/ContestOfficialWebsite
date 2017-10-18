@@ -5,7 +5,7 @@ import Home from '../containers/Home';
 import NotFound from '../containers/NotFound';
 import Rank from '../containers/Rank';
 import App from '../containers/App.js';
-
+import AboutUs from '../containers/AboutUs';
 class RouteMap extends React.Component {
 
 updateHandle() { 
@@ -21,6 +21,7 @@ updateHandle() {
                     <IndexRoute component={Home}/> 
                     <Route path='/home' component={Home}/>
                     <Route path='/rank' component={Rank}/>
+                    <Route path='/about' component={AboutUs}/>
                     <Route path="*" component={NotFound}/> 
                 </Route> 
             </Router> 

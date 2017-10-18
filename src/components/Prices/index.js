@@ -1,13 +1,13 @@
 import  React from 'react';
 import { Link } from 'react-router';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
-import { Button, Row, Col } from 'antd'
+import { Button, Row, Col} from 'antd'
 
 import PriceItem from './subpage';
 import './style.less';
 
-let xm = '';
 class Prices extends React.Component{
+                            // <img className='prices-img-wordpad' src='./src/static/images/award_title_bg.png' />
 
     render(){
         const { prices } = this.props;

@@ -2,11 +2,12 @@ import  React from 'react';
 import { Link } from 'react-router';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 
-import { Form, Input, Tooltip, Icon, Row, Col, Button, message, Spin } from 'antd';
+import { Form, Input, Tooltip, Icon, Row, Col, Button, message, Spin, notification } from 'antd';
 const FormItem = Form.Item;
 
 import register from '../../../../fetch/register';
 import getVerifyCode from '../../../../fetch/getVerifyCode';
+import mailToWebsite from '../../../../components/mailToWebsite';
 import './style.less';
 
 class Register extends React.Component{
@@ -55,16 +56,20 @@ class Register extends React.Component{
         verifyCode: verification
       }, captchaHead)
       result.then(resp =>{
-        if (resp.ok) {
-          return resp.text()
-        } else {  
-          return message.error('500: 服务器内部错误')
-          // 登录失败时更新验证码
-          this.getVerifyCodeAction();
-        }
+        if (resp.status===502) {
+            message.error('502 Bad Gatway');
+          } else if(resp.status===500) {
+            message.error('500 服务器内部错误');
+          } else if(resp.status===403) {
+            message.error('邮箱已經被注册,请更换过后再试');
+          } else{
+            return resp.json()
+          }
       }).then(text=>{
+        this.getVerifyCodeAction();
         if (!!text) {
-          message.success('注冊成功');
+          // message.success('注冊成功, 请登录你的邮箱激活账号.');
+          this.mailToWebsiteAction();
         }
       })
     }
@@ -115,6 +120,29 @@ class Register extends React.Component{
     handleChangeVerifyCode(e) {
       this.getVerifyCodeAction();
     }
+    mailToWebsiteAction() {
+      const mail = this.props.form.getFieldValue('mail');
+      // 根据对应邮箱打开
+      const toMail = mailToWebsite(mail);
+      const key = `${new Date()}`;
+      const btnClick = ()=>{
+        notification.close(key);
+        window.open(`http://${toMail}`, '_blank');
+      }
+      // 自定义取消按钮
+      const btn = (
+        <Button onClick={btnClick}>click me to your mail</Button>
+        )
+      notification.open({
+        message: `One last step to register`,
+        description:'we have send a message to your e-mail,please confirm your email and activate the account',
+        icon: <Icon type='info-circle' style={{ color: '#e46a5d' }}  />,
+        btn,
+        key,
+      })
+      // 切换至登录页
+      this.props.onLogin();
+    }
     render(){
         const { getFieldDecorator } = this.props.form;
         const { verifyCode } = this.state;
@@ -157,7 +185,7 @@ class Register extends React.Component{
                  label={(
                   <span>
                     Name&nbsp;
-                    <Tooltip title="Recommend the real name">
+                    <Tooltip title="Recommended to use real names">
                       <Icon type="question-circle-o" />
                     </Tooltip>
                   </span>
@@ -165,7 +193,6 @@ class Register extends React.Component{
                  {
                     getFieldDecorator('name', {
                         rules: [{
-                            type: 'string',
                             pattern: /[\u4e00-\u9fa5]/,
                             message: 'The input is not valid name',
                         },{
@@ -262,7 +289,7 @@ class Register extends React.Component{
                     )}
                       <span className='register-verification' onClick={this.handleChangeVerifyCode.bind(this)}>
                         <Spin spinning={this.state.verifyCodeLoading}>
-                          <img alt='验证码' title='点击更换图片' src={`data:image/png;base64,${verifyCode}`}/>
+                          <img alt='验证码加载中' title='点击更换图片' src={`data:image/png;base64,${verifyCode}`}/>
                         </Spin>
                       </span>
                  </FormItem>

@@ -109,18 +109,32 @@ class Login extends React.Component{
           });
           // 更改登陆按钮状态
           this.changeLoginBtnLoadState(false);
-          message.success('登录成功');
+          message.success('Login Success');
           // 隐藏弹窗
           this.props.cb();
         } else {
-          message.error(data.msg);
-          // console.log('error', data.msg);
-          this.props.form.setFields({
+          let info = data.msg;
+          message.error(info);
+          if(info==='Password wrong'){
+            this.props.form.setFields({
+              userName: {
+                value: '',
+                errors: [new Error('wrong match')],
+              },
+              passWord: {
+                value: '',
+                errors: [new Error('wrong match')],
+              },
+            });
+          } else {
+            this.props.form.setFields({
               verification: {
                 value: verification,
                 errors: [new Error('Invalid verification code!')],
               },
             });
+          }
+          
           // 登录失败时更新验证码
           this.getVerifyCodeAction();
           // 更改登陆按钮状态
@@ -183,7 +197,6 @@ class Login extends React.Component{
                     })(
                       <Checkbox>Remember me</Checkbox>
                     )}
-                    <a className="login-form-forgot" href="javascript: void(0)">Forgot passWord</a>
                     <Button loading={this.state.loginLoading} type="primary" htmlType="submit" className="login-form-button">
                       Log in
                     </Button>
@@ -194,6 +207,7 @@ class Login extends React.Component{
         )
     }
 }
+                    // <a className="login-form-forgot" href="javascript: void(0)">Forgot passWord</a>
 const LoginWrap = Form.create()(Login);
 
 // 链接redux

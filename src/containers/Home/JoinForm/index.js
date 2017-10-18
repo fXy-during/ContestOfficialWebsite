@@ -8,7 +8,9 @@ import './style.less';
 
 const FormItem = Form.Item;
 
+// 初始为一个输入框
 let uuid = 1;
+// 最多输入框数
 const maxMember = 2;
 class JoinForm extends React.Component{
     constructor(props, context){
@@ -19,7 +21,9 @@ class JoinForm extends React.Component{
       const { form } = this.props;
       // can use data-binding to get
       const keys = form.getFieldValue('keys');
+      console.log('uuid', uuid);
       // We need at least one passenger
+      
       if (keys.length === 1) {
         return;
       }
@@ -31,14 +35,17 @@ class JoinForm extends React.Component{
     }
 
   add() {
-    if (uuid>=maxMember) {
+    const { form } = this.props;
+      // can use data-binding to get
+    const keys = form.getFieldValue('keys');
+    
+    if (keys.length>=maxMember) {
       message.error(`超过最大人数${maxMember}`);
+      console.log('keys', keys);
       return;
     }
     uuid++;
-    const { form } = this.props;
     // can use data-binding to get
-    const keys = form.getFieldValue('keys');
     const nextKeys = keys.concat(uuid);
     // can use data-binding to set
     // important! notify form to detect changes

@@ -23,7 +23,7 @@ class TimeLine extends React.Component{
                       <h1>时间安排</h1>
                       <h2>Schedule</h2>
                   </p>
-                  <img src='./src/static/images/schedule_title_bg.png' />
+                  <img src='../src/static/images/schedule_title_bg.png' />
               </div>  
             </div>
         )

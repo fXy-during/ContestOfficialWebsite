@@ -34,6 +34,12 @@ class User extends React.Component{
         registerVisible: true
       })
     }
+    handleToLogin(){
+      this.setState({
+        loginVisible: true,
+        registerVisible: false
+      })
+    }
     render(){
         const { username, signOut } = this.props;
         return(
@@ -59,7 +65,7 @@ class User extends React.Component{
               onCancel={this.hideModal.bind(this)}
              >
               <p id='login-logo-container'>
-                <img className='login-logo-img' src='../../../src/static/images/logo.png'/>
+                <img className='login-logo-img' src='../src/static/images/logo.png'/>
               </p>
               <Login init={this.state.loginVisible} cb={this.hideModal.bind(this)} onRegister={this.handleToRegistration.bind(this)} />
             </Modal>
@@ -70,7 +76,7 @@ class User extends React.Component{
               onCancel={this.hideModal.bind(this)}
               footer={null}
              >
-              <Register init={this.state.registerVisible}/ >
+              <Register init={this.state.registerVisible} onLogin={this.handleToLogin.bind(this)}/>
             </Modal>
             </div>
 

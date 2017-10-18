@@ -6,7 +6,6 @@ import { Table } from 'antd';
 
 import './style.less';
 
-
 class RankTable extends React.Component{
     constructor(props, context){
         super(props, context);
@@ -21,7 +20,7 @@ class RankTable extends React.Component{
             render: (text, record) => {
               if (text<=3) {
                 return (
-                <span className={`rank-top-${text}`} ><img src='./src/static/images/award.png' /></span>
+                <span className={`rank-top-${text}`} ><img src='../src/static/images/award.png' /></span>
                 )
               } else {
                 return (
@@ -46,7 +45,7 @@ class RankTable extends React.Component{
         const { data, loading } = this.props;
 
         return(
-            <div className='home-section-container'>
+            <div className='home-section-container' style={{ backgroundColor: '#4fbab4' }}>
             <Table
             pagination={false}
             loading={loading}
@@ -54,8 +53,6 @@ class RankTable extends React.Component{
             columns={columns}
             rowKey="teamId"
             />
-
-
             </div>
         )
     }
