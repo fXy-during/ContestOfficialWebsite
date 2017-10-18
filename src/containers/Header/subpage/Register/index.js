@@ -194,7 +194,7 @@ class Register extends React.Component{
                     getFieldDecorator('name', {
                         rules: [{
                             pattern: /[\u4e00-\u9fa5]/,
-                            message: 'The input is not valid name',
+                            message: 'The name entered is not valid',
                         },{
                             required: true,
                             message: 'please input your real name',
@@ -205,16 +205,16 @@ class Register extends React.Component{
                  </FormItem>
                  <FormItem 
                  {...formItemLayout}
-                 label='SchoolNumber:'
+                 label='StudentID:'
                  hasFeedback>
                  {
                     getFieldDecorator('number', {
                         rules: [{
                             len: 12,
-                            message: 'The input is not valid SchoolNumber',
+                            message: 'The input is not valid StudentID',
                         },{
                             required: true,
-                            message: 'please input your SchoolNumber',
+                            message: 'please input your StudentID',
                         }]
                     })(
                         <Input placeholder=''/>
@@ -228,7 +228,7 @@ class Register extends React.Component{
                     getFieldDecorator('mail', {
                         rules: [{
                             type: 'email', 
-                            message: 'The input is not valid E-mail',
+                            message: 'The input is not a valid E-mail',
                         },{
                             required: true,
                             message: 'please input your E-mail',
@@ -277,14 +277,14 @@ class Register extends React.Component{
                     getFieldDecorator('verification', {
                         rules: [{
                             len: 5,
-                            message: 'The input is not valid verification',
+                            message: 'The input is not a valid verification',
                         },{
                             required: true,
                             message: 'please input your verification',
                         }]
                     })(
                       <p>
-                        <Input placeholder='the verification on the right'/>
+                        <Input placeholder='Verification Code on the right'/>
                       </p>
                     )}
                       <span className='register-verification' onClick={this.handleChangeVerifyCode.bind(this)}>

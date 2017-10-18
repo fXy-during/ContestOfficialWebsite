@@ -60,7 +60,11 @@ class Home extends React.Component{
                 return resp.json()
             }
         }).then(info=>{
-            message.info(info.msg)
+            if (info.msg==1) {
+                message.success('Your team has been created successfully!');
+            } else { 
+                message.info(info.msg)
+            }
         }).catch(ex=>{
             console.log('catch error', ex.message);
         })
