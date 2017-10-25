@@ -15,7 +15,7 @@ class Footer extends React.Component {
         key="footer"
       >
         <span className='footer-text'>
-          Copyright © 2017 The Project by <a href="javascript: void(0)">CINS</a>. All Rights Reserved
+          Copyright © 2017 The Project by <a href="javascript: void(0)">创数据</a>. All Rights Reserved
         </span>
       </TweenOne>
     </OverPack>);

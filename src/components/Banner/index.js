@@ -8,14 +8,18 @@ class Logo extends React.Component{
         this.props.takeIn();
     }
     render(){
+        const { isMatched } = this.props;
         return(
             <div id='content-banner-container'>
-                <img className='content-banner-logo' src='../src/static/images/314684282-01.png'/>
+                <img className='content-banner-logo' src='../src/static/images/bg_latest.png'/>
                 <div className='content-banner-text'>
                     <h1>创数据算法比赛</h1>
                     <h2>Creating data algorthm contest</h2>
                 </div>
-                <Button className='content-banner-btn' onClick={this.handleClick.bind(this)}>参加比赛</Button>
+                <Button className='content-banner-btn' onClick={this.handleClick.bind(this)}>
+                {
+                    !isMatched? '参加比赛' :'查看排行榜'
+                }</Button>
             </div>
         )
     }

@@ -38,6 +38,7 @@ class Login extends React.Component{
     getVerifyCodeAction() {
       this.setState({
         verifyCodeLoading: true,
+        loginLoading: false
       });
       let result = getVerifyCode();
       result.then(resp=>{
@@ -184,7 +185,7 @@ class Login extends React.Component{
                       <Input placeholder='verification' prefix={<Icon type="credit-card" style={{ fontSize: 13 }} />} style={{width: '60%'}} />
                       <span className='login-input-verification' onClick={this.handleChangeVerifyCode.bind(this)}>
                       <Spin spinning={this.state.verifyCodeLoading}>
-                        <img alt='验证码加载中' title='点击更换图片' src={`data:image/png;base64,${verifyCode}`}/>
+                        <img alt='loading' title='click me to change one' src={`data:image/png;base64,${verifyCode}`}/>
                       </Spin>
                       </span>
                     </p>

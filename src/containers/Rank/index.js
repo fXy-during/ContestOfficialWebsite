@@ -40,7 +40,7 @@ class Rank extends React.Component{
     
     render(){
         const { data } = this.state;
-        const { mail, token } = this.props.userinfo;
+        const { mail, token, matched } = this.props.userinfo;
         return(
             <Layout>
                 <Header id='layout-header-diy'>
@@ -56,7 +56,7 @@ class Rank extends React.Component{
                       <img className='rank-img-cup' src='../src/static/images/awarkCup.png'/>
                     </div>
                     <RankTable  data={data} loading={!!data.length?false:true}/>
-                    <UploadFile mail={mail} token={token} />
+                    <UploadFile mail={mail} token={token} matched={matched} />
                 </Content>
                 <Footer id='layout-footer'>
                     <Foot /> 

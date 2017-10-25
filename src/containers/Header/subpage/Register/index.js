@@ -103,7 +103,7 @@ class Register extends React.Component{
     checkPassword(rule, value, callback) {
       const form = this.props.form;
       if (value && value !== form.getFieldValue('password')) {
-        callback('Two passwords that you enter is inconsistent!');
+        callback('Two passwords that you entered is inconsistent!');
       } else {
         callback();
       }
@@ -173,8 +173,8 @@ class Register extends React.Component{
               offset: 0,
             },
             sm: {
-              span: 14,
-              offset: 6,
+              span: 4,
+              offset: 16,
             },
           },
         };
@@ -182,14 +182,7 @@ class Register extends React.Component{
             <Form onSubmit={this.handleSubmit.bind(this)}>
                 <FormItem 
                  {...formItemLayout}
-                 label={(
-                  <span>
-                    Name&nbsp;
-                    <Tooltip title="Recommended to use real names">
-                      <Icon type="question-circle-o" />
-                    </Tooltip>
-                  </span>
-                  )}>
+                 label='Name'>
                  {
                     getFieldDecorator('name', {
                         rules: [{
@@ -200,7 +193,9 @@ class Register extends React.Component{
                             message: 'please input your real name',
                         }]
                     })(
+                    <Tooltip title="Recommended to use real names">
                         <Input placeholder='your name'/>
+                    </Tooltip>
                     )}
                  </FormItem>
                  <FormItem 
@@ -289,7 +284,7 @@ class Register extends React.Component{
                     )}
                       <span className='register-verification' onClick={this.handleChangeVerifyCode.bind(this)}>
                         <Spin spinning={this.state.verifyCodeLoading}>
-                          <img alt='验证码加载中' title='点击更换图片' src={`data:image/png;base64,${verifyCode}`}/>
+                          <img alt='loading' title='click me to change one' src={`data:image/png;base64,${verifyCode}`}/>
                         </Spin>
                       </span>
                  </FormItem>

@@ -14,6 +14,9 @@ class AboutUs extends React.Component{
         super(props, context);
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     }
+    handleClick() {
+         window.open('http://182.150.37.74:88/dist', '_blank');
+    }
     render(){
         return(
             <Layout>
@@ -22,9 +25,9 @@ class AboutUs extends React.Component{
                 </Header>
                 <Content>
                     <div id='aboutUs-head-bg-container'>
-                        <img className='aboutUs-head-bg' src='../src/static/images/AboutUs_head_bg.png'/>
+                        <img className='aboutUs-head-bg' src='../src/static/images/AboutUs_head_bg_test.png'/>
                         <h1 className='aboutUs-head-text'>创数据团队招新进行中</h1>
-                        <Button className='aboutUs-head-btn'>加入我们</Button>
+                        <Button className='aboutUs-head-btn' onClick={this.handleClick.bind(this)}>加入我们</Button>
                     </div>
                     <TeamInfo />
                 </Content>

@@ -14,3 +14,10 @@ export function logout(data) {
         data
     }
 }
+
+export function match(data) {
+    return {
+        type: actionTypes.USERINFO_MATCH,
+        data
+    }
+}

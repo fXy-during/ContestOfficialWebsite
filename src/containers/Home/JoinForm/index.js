@@ -98,12 +98,7 @@ class JoinForm extends React.Component{
         <FormItem
           {...(index === 0 ? formItemLayout : formItemLayoutWithOutLabel)}
           label={index === 0 ? 
-                  <span>
-                    Members&nbsp;
-                    <Tooltip title="include your own email">
-                      <Icon type="question-circle-o" />
-                    </Tooltip>
-                  </span> : ''}
+                  <span>Members&nbsp; </span>: ''}
           required={index === 0 ? true : false }
           key={k}
         >
@@ -116,7 +111,10 @@ class JoinForm extends React.Component{
               message: "Please input your team members' email.",
             }],
           })(
-            <Input placeholder="members' email" style={{ width: '80%', marginRight: 8 }} />
+
+            <Tooltip  title={index===0?'include your own email':''}>
+              <Input placeholder="members' email" style={{ width: '80%', marginRight: 8 }} />
+            </Tooltip> 
           )}
           {keys.length > 1 ? (
             <Icon

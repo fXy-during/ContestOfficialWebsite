@@ -1,9 +1,10 @@
 import  React from 'react';
-import { Link } from 'react-router';
+import { hashHistory } from 'react-router';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
-import { Layout, message, Modal } from 'antd';
+import { Layout, message, Modal, Button } from 'antd';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import * as userInfoActionsFromOtherFile from '../../actions/userinfo.js';
 
 import Head from '../Header';
 import JoinForm from './JoinForm';
@@ -35,7 +36,8 @@ class Home extends React.Component{
         const matched  = !!this.props.userinfo.token ? this.props.userinfo.matched : UNLOG;
         console.log('matched', matched);
         if (matched===true) {
-            message.info('你已经参加了比赛');
+            // message.info('你已经参加了比赛');
+            hashHistory.push('rank');
         } else if (matched===UNLOG) { 
             message.info('请先登录');
         } else {
@@ -57,35 +59,56 @@ class Home extends React.Component{
                 console.log(resp.statusText);
                 return resp.json()
             } else {
-                return resp.json()
+                return resp.text()
             }
         }).then(info=>{
-            if (info.msg==1) {
+            console.log('info', info);
+            if (info==1) {
                 message.success('Your team has been created successfully!');
+                this.props.userinfoAction.match({
+                    matched: true,
+                })
             } else { 
-                message.info(info.msg)
+                message.error(info.msg);
             }
         }).catch(ex=>{
             console.log('catch error', ex.message);
         })
     }
+    // {
+    //         title: 'Alienware17C-R2848',
+    //         rank: 1,
+    //         description: 'i7-7820HK 16G 1TSSD+1T GTX1080 8G独显 QHD (价值33999.00￥)',
+    //         img: '../src/static/images/award_one.jpg',
+    //     },{
+    //         title: 'Alienware  24.5英寸电竞显示器',
+    //         rank: 2,
+    //         description: 'AW2518H G-Sync 240Hz刷新专业游戏电竞显示器 (价值5999.00￥)',
+    //         img: '../src/static/images/award_two.jpg',
+    //     },{
+    //         title: 'Alienware Advanced版 游戏键盘',
+    //         rank: 3,
+    //         description: ' AW568 机械/茶轴游戏键盘(AlienFX灯效 全键无冲 5个宏按键)黑 (价值899.00￥)',
+    //         img: '../src/static/images/award_three.jpg',
+    //     },
     render(){
         const prices = [{
-            title: 'Alienware17C-R2848',
+            title: '樱桃（Cherry）G80-3000LXCEU-2机械键盘',
+            description: '程序员的梦想，德国樱桃，历久弥新。樱桃经典之一——SINCE 1989， CHERRY G80-3000系列键盘于1989年出品，是一款销售至今任然在售的机械键盘，在电脑终端产品里堪称奇迹(￥709*2)',
+            img: '../src/static/images/prices/first.png',
             rank: 1,
-            description: 'i7-7820HK 16G 1TSSD+1T GTX1080 8G独显 QHD (价值33999.00￥)',
-            img: '../src/static/images/award_one.jpg',
+
         },{
-            title: 'Alienware  24.5英寸电竞显示器',
+            title: '魔声（Monster）Ntune 灵动 头戴式线控耳机',
             rank: 2,
-            description: 'AW2518H G-Sync 240Hz刷新专业游戏电竞显示器 (价值5999.00￥)',
-            img: '../src/static/images/award_two.jpg',
+            description: 'Ncredible系列中的N-Tune压耳式耳机以一系列魔声创新技术为基础进行设计，具备高性能、耐用性和时尚性等特点，确保将专业的音质呈现给所有人。轻便的N-Tune压耳式耳机设计便于长时间佩戴。采用无缠结线材，使用起来更加方便，低调的直角接头增加了舒适性和灵活度。(￥399*2)',
+            img: '../src/static/images/prices/second.png',
         },{
-            title: 'Alienware Advanced版 游戏键盘',
+            title: '雷蛇（Razer）炼狱蝰蛇 DeathAdder',
             rank: 3,
-            description: ' AW568 机械/茶轴游戏键盘(AlienFX灯效 全键无冲 5个宏按键)黑 (价值899.00￥)',
-            img: '../src/static/images/award_three.jpg',
-        }]
+            description: '6400dpi 4G光学传感器,经优化的人体工学侧裙设计,支持Razer Synapse(￥249*4)',
+            img: '../src/static/images/prices/third.png',
+        },]
         return(
             <Layout>
                 <Header id='layout-header-diy'>
@@ -103,7 +126,7 @@ class Home extends React.Component{
                      <JoinForm createTeam={this.handleCreateTeam.bind(this)}/>
                     </Modal>
 
-                    <Banner takeIn={this.handleTakeIn.bind(this)}/>
+                    <Banner takeIn={this.handleTakeIn.bind(this)} isMatched={this.props.userinfo.matched}/>
                     <ContestInfo />
                     <TimeLine />
                     <Prices prices={prices} />
@@ -123,4 +146,9 @@ function mapStateToProps(state) {
         userinfo: state.userinfo
     }
 }
-export default connect(mapStateToProps)(Home);
+function mapStateToDispatch(dispatch) {
+    return {
+        userinfoAction: bindActionCreators(userInfoActionsFromOtherFile, dispatch)
+    }
+}
+export default connect(mapStateToProps, mapStateToDispatch)(Home);

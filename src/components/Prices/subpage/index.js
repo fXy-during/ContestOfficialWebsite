@@ -8,10 +8,11 @@ import './style.less';
 class Prices extends React.Component{
 
     render(){
+        const numberArr = ['一', '二', '三'];
         const { title, rank, description, img } = this.props.data;
         return(
             <Card>
-                <span className={`price-rank-${rank}`}>{rank}等奖</span>
+                <span className={`price-rank-${rank}`}>{numberArr[rank-1]}等奖</span>
                 <div className="custom-image">
                   <img alt="奖品图片" width="100%" src={img} />
                 </div>
@@ -23,5 +24,6 @@ class Prices extends React.Component{
         )
     }
 }
+                // <span className={`rank-top-${rank}`} ><img src='../src/static/images/award.png' /></span>
 
 export default Prices;

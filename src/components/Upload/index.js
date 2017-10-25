@@ -12,15 +12,24 @@ class UploadFile extends React.Component{
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     }
     handleDownLoad() {
+      const downloadUrl = 'http://182.150.37.58:9595/cins/passCheck/bigdata.zip';
       let _a = document.createElement('a');
-      _a.href='http://182.150.37.58/opt/data-castle/work/test.rar';
-      _a.download = '大数据.rar'
+      _a.href=downloadUrl;
+      _a.download = '大数据题目.rar'
       console.log(_a);
       _a.click();
       _a=null;
+      // try{ 
+      //       var elemIF = document.createElement("iframe");   
+      //       elemIF.src = downloadUrl;   
+      //       elemIF.style.display = "none";   
+      //       document.body.appendChild(elemIF);   
+      //   }catch(e){ 
+      //       console.log('下载出错', e);
+      //   } 
     }
     render(){
-      const { mail, token } = this.props;
+      const { mail, token, matched } = this.props;
       const options = {
         name: 'answer',
         showUploadList: true,
@@ -31,12 +40,12 @@ class UploadFile extends React.Component{
         },
         onChange(info) {
           if (info.file.status !== 'uploading') {
-            console.log(info.file, info.fileList);
+            console.log(info.file, info.file);
           }
           if (info.file.status === 'done') {
-            message.success(`${info.file.name} file uploaded successfully`);
+            message.success(`${info.file.name} 上传成功`);
           } else if (info.file.status === 'error') {
-            message.error(`${info.file.name} file upload failed.`, info.event);
+              message.error(`${info.file.name} 上传失败, ${info.file.response.msg}`);
           }
         },
       }
@@ -47,7 +56,7 @@ class UploadFile extends React.Component{
             <img className='context-img-disk' src='../src/static/images/Udisk.png' />
 
             <h1>题目描述:</h1>
-            <p>银行排队系统也称之为银行排队机、叫号显示系统.<br/>
+            <p>银行排队系统也称之为银行排队机、叫号显示系统。<br/>
 随着电子信息产品、智能产品的快速发展，以及人类生活对服务环境、服务效率的要求越来越高，尤其是在服务性行业里更是如此，因此排队系统这个概念就应运而生了。<br/> 但是在一些落后的地区，没有先进的系统支持，人们还在为了排队而烦恼。有时候看到银行门口长长的队伍，许多人就直接放弃了等待。<br/>这看似普通的现象，背后却蕴含着大量有迹可循的大道理！！！<br/>聪明的你可能会说，当一个顾客刚刚走进银行的时候，你就已经知道了他会离开所在队伍的可能性，从而选对正确的队列，减少等待。<br/>预测数据并不是凭空猜测，你肯定也需要一些数据作为你预测的佐证</p>
             </div>
             <div className='context-text-container'>
@@ -82,7 +91,7 @@ class UploadFile extends React.Component{
             文件内容为按序排列，即你的文件的第一行数据，对应测试集的第一行的答案。请不要有任何的多余内容（甚至是空格）</p>
             </div>
             {
-              !!mail?
+              !!(!!mail&&matched)?
               <div className='upload-container'>
                 <Dragger {...options}>
                   <p className="ant-upload-drag-icon">
@@ -93,7 +102,7 @@ class UploadFile extends React.Component{
               </div> :
               <div className='upload-tip-tologin'>
               <Anchor>
-                <Link href='#layout-header-diy' title='请在登录后提交结果' />
+                <Link href='#layout-header-diy' title='请在登录并组建队伍后提交结果' />
               </Anchor>
               </div>
             }

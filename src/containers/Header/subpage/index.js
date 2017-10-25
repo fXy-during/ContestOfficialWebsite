@@ -47,12 +47,12 @@ class User extends React.Component{
             {
                 !!username ? 
                 <span className='header-user-container'>
-                  <span><Icon type='user' />{username}</span>
-                  <Button ghost type='dashed' onClick={signOut}>注销</Button>
+                  <span className='header-user-icon'><Icon type='user' />{username}</span>
+                  <Button ghost type='dashed' onClick={signOut}>Sign Out</Button>
                 </span> : 
                 <span className='header-btn-container'>                  
-                    <Button onClick={this.showModal.bind(this, 'loginVisible')} ghost>登录</Button>
-                    <Button onClick={this.showModal.bind(this, 'registerVisible')} ghost>注冊</Button>
+                    <Button onClick={this.showModal.bind(this, 'loginVisible')} ghost>Sign in</Button>
+                    <Button onClick={this.showModal.bind(this, 'registerVisible')} ghost>register</Button>
                 </span>
             }
 
@@ -76,7 +76,7 @@ class User extends React.Component{
               onCancel={this.hideModal.bind(this)}
               footer={null}
              >
-              <Register init={this.state.registerVisible} onLogin={this.handleToLogin.bind(this)}/>
+              <Register init={this.state.registerVisible} onLogin={this.hideModal.bind(this)}/>
             </Modal>
             </div>
 

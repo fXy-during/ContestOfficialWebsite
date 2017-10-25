@@ -47,7 +47,12 @@ class RankTable extends React.Component{
         return(
             <div className='home-section-container' style={{ backgroundColor: '#4fbab4' }}>
             <Table
-            pagination={false}
+
+            pagination={
+              data.length>8 ? 
+              {
+                pageSize: 8,
+              } : false}
             loading={loading}
             dataSource={data}
             columns={columns}

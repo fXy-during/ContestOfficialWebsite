@@ -24,13 +24,13 @@ class Category extends React.Component{
               selectedKeys={[this.props.current]}
               mode="horizontal">
                 <MenuItem key='home'>
-                  首页
+                  Home
                 </MenuItem>
                 <MenuItem key='rank'>
-                  排行榜
+                  subject&Rank
                 </MenuItem>
                 <MenuItem key='about'>
-                  关于我们
+                  AboutUs
                 </MenuItem>
             </Menu>
             </div>

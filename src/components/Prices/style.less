@@ -1,17 +1,40 @@
+@import '../../static/style/textStyle.less';
+
+#prices-section-container {
+    height: auto;
+}
 .price-wrap {
     height: 100%;
-    overflow: hidden;
     position: relative;
     .prices-img-wordpad {
         position: absolute;
     }
 }
 .prices-title {
+    height: 140px;
+    position: relative;
+    overflow: hidden;
     margin-bottom: 15px;
-    p {
-        margin-top: 5px;
+
+    img {
+        position: absolute;
+        left: calc(~"50% - 65px ");
     }
+    h2 {
+        z-index: 999;
+        position: absolute;
+        left: calc(~"50% - 58px ");
+        .text-style-title-b;
+    }
+    h3 {
+        z-index: 999;
+        position: absolute;
+        left: calc(~"50% - 20px ");
+        top: 50px;
+        .text-style-subTitle-b;
+    }
+
 }
-.col-diy {
-    margin: 0 26px;
-}
+// .col-diy {
+//     margin: 0 10px;
+// }

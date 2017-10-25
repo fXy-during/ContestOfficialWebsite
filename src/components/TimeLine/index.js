@@ -24,7 +24,8 @@ class TimeLine extends React.Component{
                       <h2>Schedule</h2>
                   </p>
                   <img src='../src/static/images/schedule_title_bg.png' />
-              </div>  
+              </div> 
+              <img className='timeline-wrap' src='../src/static/images/timeline.png' /> 
             </div>
         )
     }
