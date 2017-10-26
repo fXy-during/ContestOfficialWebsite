@@ -69,6 +69,7 @@ class JoinForm extends React.Component{
           teamName: values.teamName,
           members,
         });
+        // console.log('team has make up', values, members);
       }
     });
   }
@@ -102,7 +103,9 @@ class JoinForm extends React.Component{
           required={index === 0 ? true : false }
           key={k}
         >
-          {getFieldDecorator(`names-${k}`, {
+          <Tooltip  title={index===0?'include your own email':''}>
+          {
+            getFieldDecorator(`names-${k}`, {
             validateTrigger: ['onChange', 'onBlur'],
             rules: [{
               type: 'email',
@@ -110,19 +113,16 @@ class JoinForm extends React.Component{
               whitespace: true,
               message: "Please input your team members' email.",
             }],
-          })(
-
-            <Tooltip  title={index===0?'include your own email':''}>
+            })(
               <Input placeholder="members' email" style={{ width: '80%', marginRight: 8 }} />
+            )}
             </Tooltip> 
-          )}
           {keys.length > 1 ? (
             <Icon
               className="dynamic-delete-button"
               type="minus-circle-o"
               disabled={keys.length === 1}
-              onClick={() => this.remove(k)}
-            />
+              onClick={() => this.remove(k)}/>
           ) : null}
         </FormItem>
       );

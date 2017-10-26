@@ -1,7 +1,7 @@
 import  React from 'react';
 import { Link } from 'react-router';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
-import { Table } from 'antd';
+import { Table, Button } from 'antd';
 
 
 import './style.less';
@@ -10,6 +10,9 @@ class RankTable extends React.Component{
     constructor(props, context){
         super(props, context);
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+    }
+    handleFreshData() {
+      this.props.RefreshData();
     }
     render(){
         const columns = [{
@@ -43,11 +46,11 @@ class RankTable extends React.Component{
           sorter: (a, b) => a.lastScore - b.lastScore,
         }]
         const { data, loading } = this.props;
-
+        const btnStyle = { marginBottom: '2px' };
         return(
             <div className='home-section-container' style={{ backgroundColor: '#4fbab4' }}>
+            <Button style={btnStyle} loading={loading}  onClick={this.handleFreshData.bind(this)}>刷新排行</Button>
             <Table
-
             pagination={
               data.length>8 ? 
               {

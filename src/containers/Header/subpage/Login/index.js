@@ -116,18 +116,21 @@ class Login extends React.Component{
         } else {
           let info = data.msg;
           message.error(info);
-          if(info==='Password wrong'){
+          if(info==='密码错误'){
             this.props.form.setFields({
-              userName: {
-                value: '',
-                errors: [new Error('wrong match')],
-              },
               passWord: {
                 value: '',
-                errors: [new Error('wrong match')],
+                errors: [new Error('The password does not match')],
               },
             });
-          } else {
+          } else if(info==='没有该用户') {
+            this.props.form.setFields({
+              userName: {
+                value: userName,
+                errors: [new Error('This user does not exist!')],
+              },
+            });
+          }else {
             this.props.form.setFields({
               verification: {
                 value: verification,

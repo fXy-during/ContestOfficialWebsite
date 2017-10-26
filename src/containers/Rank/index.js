@@ -21,6 +21,7 @@ class Rank extends React.Component{
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
         this.state = {
             data: [],
+            loading: false,
         }
     }
     componentDidMount() {
@@ -28,18 +29,19 @@ class Rank extends React.Component{
     }
     // 获取排行榜数据
     getRankAction() {
+        this.setState({loading: true})
         let result = getRank();
         result.then(resp => {
             if (resp.ok) {
                 return resp.json()
             }
         }).then(data =>{
-            this.setState({data});
+            this.setState({data, loading: false});
         })
     }
     
     render(){
-        const { data } = this.state;
+        const { data, loading } = this.state;
         const { mail, token, matched } = this.props.userinfo;
         return(
             <Layout>
@@ -55,7 +57,7 @@ class Rank extends React.Component{
                       <img className='rank-img-bg' src='../src/static/images/info_ahead.png' />
                       <img className='rank-img-cup' src='../src/static/images/awarkCup.png'/>
                     </div>
-                    <RankTable  data={data} loading={!!data.length?false:true}/>
+                    <RankTable RefreshData={this.getRankAction.bind(this)}  data={data} loading={loading}/>
                     <UploadFile mail={mail} token={token} matched={matched} />
                 </Content>
                 <Footer id='layout-footer'>

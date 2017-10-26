@@ -38,8 +38,9 @@ class Register extends React.Component{
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
           if (!err) {
-            console.log('Received values of form: ', values);
             this.registerAction(values);
+            console.log('Received values of form: ', values);
+            // message.success('test 注冊成功');
           }
         });
     }
@@ -180,23 +181,24 @@ class Register extends React.Component{
         };
         return(
             <Form onSubmit={this.handleSubmit.bind(this)}>
-                <FormItem 
-                 {...formItemLayout}
-                 label='Name'>
-                 {
-                    getFieldDecorator('name', {
-                        rules: [{
-                            pattern: /[\u4e00-\u9fa5]/,
-                            message: 'The name entered is not valid',
-                        },{
-                            required: true,
-                            message: 'please input your real name',
-                        }]
-                    })(
-                    <Tooltip title="Recommended to use real names">
-                        <Input placeholder='your name'/>
-                    </Tooltip>
-                    )}
+                  <FormItem 
+                   {...formItemLayout}
+                   label='Name'>
+                  <Tooltip title="Recommended to use real names">
+                   {
+                      getFieldDecorator('name', {
+                          rules: [{
+                              pattern: /[\u4e00-\u9fa5]/,
+                              message: 'The name entered is not valid',
+                          },{
+                              required: true,
+                              message: 'please input your real name',
+                          }]
+                      })(
+                          <Input placeholder='your name'/>
+                      )
+                    }
+                  </Tooltip>
                  </FormItem>
                  <FormItem 
                  {...formItemLayout}

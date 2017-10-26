@@ -1,18 +1,68 @@
 #teaminfo-container {
     padding: 0 187px;
     text-align: center;
-    .teaminfo-text-header {
-        margin: 0 auto;
+    .ant-col-12 { position: static;}
+    &.teacherTitle {
+        color: #fff;
+        font-size: 16px;
+        text-align: right;
+        line-height: 1em; 
+        padding-bottom: 0 !important;   
+        width: 100px;
+        &:first-child {
+            text-align: left;
+        }
     }
+    .teacherTitle-0 {
+        position: absolute;
+        left: 27%;
+        top: 73%;
+        h1 {
+            .teacherTitle;
+        }
+    }
+    .teacherTitle-1 {
+        position: absolute;
+        left: 63%;
+        top: 70%;
+        h1 {
+            .teacherTitle;
+        }
+    }
+    .teacherTitle-2 {
+        position: absolute;    
+        left: 12%;
+        top: 74%;
+        h1 {
+            .teacherTitle;
+        }
+    }
+    .teacherTitle-3 {
+        position: absolute;    
+        left: 82%;
+        top: 29%;
+        h1 {
+            .teacherTitle;
+        }
+    }
+    .textLeft { h2 {text-align: left } };
+    .textRight { h2 { text-align: right } };
     .teaminfo-text-section,
     .teachers-text-section {
+        position: relative;
         padding: 70px 0;
     }
     .teaminfo-img {
         width: 400px;
         height: 225px;
     }
-    .teaminfo-teacher-container {
+    .teaminfo-text-header {
+        >p h1 {
+            font-size: 30px;
+        }
+        >p h2 {
+            color: #000;
+        }
         padding: 70px 0;
     }
     .teaminfo-avatar {
@@ -20,15 +70,21 @@
         max-height: 500px;
         min-height: 400px;
     }
-    .teaminfo-text-wrap,
-    .teachers-text-wrap {
+    .teaminfo-text-wrap {
         h1 {
             padding-bottom: 26px;
             font-size: 28px;
         }
+    }
+    .teachers-text-wrap {
         h2 {
+            font-size: 23px;
+            line-height: 1.5em;
+        }
+    }
+        h2 {
+            color: #4fbab4;
             font-size: 18px;
             // padding: 30px 0;
         }
-    }
 }
