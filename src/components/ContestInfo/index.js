@@ -22,7 +22,7 @@ class ContestInfo extends React.Component{
             </div>
             <p className='contest-info-text-container'>
                 参赛人数：每支队伍人数限定1~2人。<br/>
-                每天提交次数：2次，1~8时，9~17时，18~0时<br/>
+                每天提交次数：2次<br/>
                 比赛时间：7天<br/>
                 注意事项：请认真阅读文档中的README文件<br/>
             </p>

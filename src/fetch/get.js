@@ -22,7 +22,7 @@ export function obj2params(obj){
 }
 
 
-export default function get(url, params, token) {
+export default function get(url, params, token, teamId=0) {
     if (params) {
         let stringifyParams = obj2params(params);
         var urlWithUrl = url + '?' + stringifyParams;
@@ -33,7 +33,8 @@ export default function get(url, params, token) {
     var result = fetch(urlWithUrl || url, {
         headers: {
             'Accept': 'application/json, text/plain, */*',
-            'Authorization': proToken
+            'Authorization': proToken,
+            'teamId': teamId, 
         },
         mode: 'cors',
     })

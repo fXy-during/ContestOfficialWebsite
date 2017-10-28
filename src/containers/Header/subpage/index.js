@@ -1,7 +1,7 @@
 import  React from 'react';
 import { Link } from 'react-router';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
-import { Icon, Button, Modal } from 'antd';
+import { Icon, Button, Modal, Popover } from 'antd';
 import Login from './Login';
 import Register from './Register';
 
@@ -15,6 +15,7 @@ class User extends React.Component{
         this.state = {
             loginVisible: false,
             registerVisible: false,
+            teamInfo: [],
         }
     }
     hideModal() {
@@ -40,14 +41,56 @@ class User extends React.Component{
         registerVisible: false
       })
     }
+    getTeamInfoAction() {
+      this.props.getTeamInfoAction();
+    }
+    getMembersList(item, index) {
+      return (
+        <p key={index} className='teamInfo-member-wrap'>
+          <span>{item.username}</span>
+          <span>{item.mail}</span>
+          <span>{item.schoolNumber}</span>
+        </p>
+      )
+    }
     render(){
-        const { username, signOut } = this.props;
+        const { username, signOut, teamInfo } = this.props;
+        let teamInfoWrap = '';
+        if (!!teamInfo.length) {
+          teamInfoWrap = (
+            <section >
+            <div className='teamInfo-title'>
+              <p>队伍名: </p>
+              <p>{teamInfo[0].teamName}</p>
+            </div>
+            <div className='teamInfo-title'>
+              <p>得分情况: </p>
+              <p>最高得分: <span className='teamInfo-score'>{teamInfo[0].maxScore}</span> </p>
+              <p>最新得分: <span className='teamInfo-score'>{teamInfo[0].lastScore}</span> </p>
+            </div>
+            <div className='teamInfo-title'>
+              <p>成员: </p>
+              {
+                teamInfo.map(this.getMembersList)
+              }
+            </div>
+            </section>
+          )
+        }
         return(
             <div id='header-user'>
             {
                 !!username ? 
-                <span className='header-user-container'>
-                  <span className='header-user-icon'><Icon type='user' />{username}</span>
+                <span className='header-user-container header-btn-container'>
+                  <span className='header-user-icon'>
+                    <Popover 
+                     title='队伍信息'
+                     trigger='focus'
+                     content={!!teamInfoWrap? teamInfoWrap: '你尚未组队'}
+                     >
+                     <Button onClick={this.getTeamInfoAction.bind(this)} ghost icon='user'>{username}</Button>
+                    </Popover>
+                  </span>
                   <Button ghost type='dashed' onClick={signOut}>Sign Out</Button>
                 </span> : 
                 <span className='header-btn-container'>                  
@@ -67,7 +110,11 @@ class User extends React.Component{
               <p id='login-logo-container'>
                 <img className='login-logo-img' src='../src/static/images/logo.png'/>
               </p>
-              <Login init={this.state.loginVisible} cb={this.hideModal.bind(this)} onRegister={this.handleToRegistration.bind(this)} />
+              <Login  
+                getTeamInfoAction={this.getTeamInfoAction.bind(this)}
+                init={this.state.loginVisible} 
+                cb={this.hideModal.bind(this)} 
+                onRegister={this.handleToRegistration.bind(this)} />
             </Modal>
             <Modal
               title='Register'

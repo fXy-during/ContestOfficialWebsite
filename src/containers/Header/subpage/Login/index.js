@@ -12,6 +12,7 @@ import loginFetch from '../../../../fetch/login';
 import getVerifyCode from '../../../../fetch/getVerifyCode';
 const FormItem = Form.Item;
 
+
 class Login extends React.Component{
     constructor(props, context){
         super(props, context);
@@ -99,15 +100,18 @@ class Login extends React.Component{
           }
       }).then(data=>{
         if(data.msg==undefined) {
-          let { mail, token, username, matched } = data;
+          let { mail, token, username, matched, teamId } = data;
           // console.log('success', data);
           // 將登录信息保存入redux
           login({
             mail,
             token,
             username,
-            matched
+            matched,
+            teamId,
           });
+          //获取队伍信息
+          this.props.getTeamInfoAction();
           // 更改登陆按钮状态
           this.changeLoginBtnLoadState(false);
           message.success('Login Success');
@@ -160,6 +164,7 @@ class Login extends React.Component{
         loginLoading: isLoading
       })
     }
+
     render(){
       const { getFieldDecorator } = this.props.form;
       const { verifyCode } = this.state;

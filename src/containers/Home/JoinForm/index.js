@@ -9,9 +9,9 @@ import './style.less';
 const FormItem = Form.Item;
 
 // 初始为一个输入框
-let uuid = 1;
+let uuid = 0;
 // 最多输入框数
-const maxMember = 2;
+const maxMember = 1;
 class JoinForm extends React.Component{
     constructor(props, context){
         super(props, context);
@@ -21,12 +21,7 @@ class JoinForm extends React.Component{
       const { form } = this.props;
       // can use data-binding to get
       const keys = form.getFieldValue('keys');
-      console.log('uuid', uuid);
-      // We need at least one passenger
-      
-      if (keys.length === 1) {
-        return;
-      }
+      // console.log('uuid', uuid);
 
       // can use data-binding to set
       form.setFieldsValue({
@@ -44,7 +39,7 @@ class JoinForm extends React.Component{
       console.log('keys', keys);
       return;
     }
-    uuid++;
+    uuid = 1;
     // can use data-binding to get
     const nextKeys = keys.concat(uuid);
     // can use data-binding to set
@@ -59,16 +54,21 @@ class JoinForm extends React.Component{
     this.props.form.validateFields((err, values) => {
       if (!err) {
         let members = [];
-        for(let [keys, values] of Object.entries(values)) {
-          // console.log('keys, values', keys, values);
-          if (keys.indexOf('name')>=0) {
-            members = members.concat(values);
-          }
+        // for(let [keys, values] of Object.entries(values)) {
+        //   // console.log('keys, values', keys, values);
+        //   if (keys.indexOf('name')>=0) {
+        //     members = members.concat(values);
+        //   }
+        // }
+        // console.log('values', values);
+        if (!!values.name) {
+          members.push(values.name);
         }
         this.props.createTeam({
           teamName: values.teamName,
           members,
         });
+        this.props.cb();
         // console.log('team has make up', values, members);
       }
     });
@@ -92,38 +92,37 @@ class JoinForm extends React.Component{
         sm: { span: 17, offset: 7 },
       },
     };
-    getFieldDecorator('keys', { initialValue: [1] });
+    getFieldDecorator('keys', { initialValue: [] });
+          // <Tooltip  title={index===0?'include your own email':''}>
+          //   </Tooltip> 
     const keys = getFieldValue('keys');
     const formItems = keys.map((k, index) => {
       return (
         <FormItem
           {...(index === 0 ? formItemLayout : formItemLayoutWithOutLabel)}
           label={index === 0 ? 
-                  <span>Members&nbsp; </span>: ''}
+                  <span>Member&nbsp; </span>: ''}
           required={index === 0 ? true : false }
           key={k}
         >
-          <Tooltip  title={index===0?'include your own email':''}>
           {
-            getFieldDecorator(`names-${k}`, {
+            getFieldDecorator(`name`, {
             validateTrigger: ['onChange', 'onBlur'],
             rules: [{
               type: 'email',
-              required: true,
               whitespace: true,
-              message: "Please input your team members' email.",
+              message: "Input your partner's email Or blank",
             }],
             })(
-              <Input placeholder="members' email" style={{ width: '80%', marginRight: 8 }} />
+              <Input placeholder="partner's email Or blank" style={{ width: '80%', marginRight: 8 }} />
             )}
-            </Tooltip> 
-          {keys.length > 1 ? (
+          { 
             <Icon
               className="dynamic-delete-button"
               type="minus-circle-o"
               disabled={keys.length === 1}
               onClick={() => this.remove(k)}/>
-          ) : null}
+          }
         </FormItem>
       );
     });
@@ -147,11 +146,14 @@ class JoinForm extends React.Component{
         }
         </FormItem>
         {formItems}
+        {
+
         <FormItem {...formItemLayoutWithOutLabel}>
           <Button type="dashed" onClick={this.add.bind(this)} style={{ width: '70%' }}>
             <Icon type="plus" /> Add team member
           </Button>
         </FormItem>
+        }
         <FormItem {...formItemLayoutWithOutLabel}>
           <Button type="primary" htmlType="submit">Create</Button>
         </FormItem>

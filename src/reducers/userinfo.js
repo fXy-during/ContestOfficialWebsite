@@ -10,6 +10,9 @@ export default function userinfo(state = initialState, action){
         case actionTypes.USERINFO_LOGOOF:
             return {}
         
+        case actionTypes.USERINFO_ADDTEAMINFO:
+            return Object.assign({}, state, { teamInfo: action.data})
+            
         case actionTypes.USERINFO_MATCH:
             return Object.assign({}, state, action.data)
         default: 

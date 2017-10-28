@@ -6,19 +6,28 @@ import './style.less';
 
 const { Link } = Anchor;
 const Dragger = Upload.Dragger;
+// 是否开放官网下载
+const isOpen = true;
+const beforeOpenInfo_download = "题目下载暂未开放，敬请等待.";
+const beforeOpenInfo_uploadFile = "文件上传功能未开放.";
+
 class UploadFile extends React.Component{
     constructor(props, context){
         super(props, context);
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     }
     handleDownLoad() {
-      const downloadUrl = 'http://182.150.37.58:9595/cins/passCheck/bigdata.zip';
-      let _a = document.createElement('a');
-      _a.href=downloadUrl;
-      _a.download = '大数据题目.rar'
-      console.log(_a);
-      _a.click();
-      _a=null;
+      if (isOpen) {
+        const downloadUrl = 'http://182.150.37.58:2017/passCheck/bigdata.zip';
+        let _a = document.createElement('a');
+        _a.href=downloadUrl;
+        _a.download = '大数据题目.rar'
+        console.log(_a);
+        _a.click();
+        _a=null;
+      } else {
+        message.info(beforeOpenInfo_download);
+      }
       // try{ 
       //       var elemIF = document.createElement("iframe");   
       //       elemIF.src = downloadUrl;   
@@ -64,10 +73,13 @@ class UploadFile extends React.Component{
             <img className='context-img-pen2' src='../src/static/images/pen2.png' />
             <h1>下面是为本次比赛准备的数据:</h1>
             <p>数据以CSV文件格式下发<br/>每一行代表影响每一位顾客是否离开的相关信息。<br/>
-数据分为两类，<br/>
-第一类是训练集（train.csv，共2000行），用于训练你的算法或计算模型。包括八个特征和一个结果（即顾客离队率）。<br/>
-第二类是测试集（test.csv，共500行），用于预测得出你本次比赛的答案。包括八个特征，结果（即顾客离队率，是你要提交给我们的答案）。</p>
-            <p><Button type='primary' onClick={this.handleDownLoad.bind(this)}>下载</Button></p>
+数据分别存在两个文件，<br/>
+第一个文件是训练集（train.csv，共2500行），用于训练你的算法或计算模型。包括八个特征和一个结果（即顾客离队率）。<br/>
+第二个文件是测试集（test.csv，共500行），用于预测得出你本次比赛的结果。包括八个特征。<br/>
+你计算出来的结果，即顾客离队率。（这是你要提交给我们的答案）<br/></p>
+           <p><Button type='primary' onClick={this.handleDownLoad.bind(this)}>下载</Button></p>
+
+            
             </div>
             
             <div className='context-text-container'>
@@ -91,7 +103,7 @@ class UploadFile extends React.Component{
             文件内容为按序排列，即你的文件的第一行数据，对应测试集的第一行的答案。请不要有任何的多余内容（甚至是空格）</p>
             </div>
             {
-              !!(!!mail&&matched)?
+              !!(!!mail&&matched&&isOpen)?
               <div className='upload-container'>
                 <Dragger {...options}>
                   <p className="ant-upload-drag-icon">
@@ -102,7 +114,7 @@ class UploadFile extends React.Component{
               </div> :
               <div className='upload-tip-tologin'>
               <Anchor>
-                <Link href='#layout-header-diy' title='请在登录并组建队伍后提交结果' />
+                <Link href='#layout-header-diy' title={ !isOpen ? beforeOpenInfo_uploadFile: '请在登录后或者组队后上传文件'} />
               </Anchor>
               </div>
             }

@@ -123,7 +123,7 @@ class Home extends React.Component{
                       onOk={this.hideModal.bind(this)}
                       onCancel={this.hideModal.bind(this)}
                      >
-                     <JoinForm createTeam={this.handleCreateTeam.bind(this)}/>
+                     <JoinForm cb={this.hideModal.bind(this)} createTeam={this.handleCreateTeam.bind(this)}/>
                     </Modal>
 
                     <Banner takeIn={this.handleTakeIn.bind(this)} isMatched={this.props.userinfo.matched}/>

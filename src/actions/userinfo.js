@@ -14,7 +14,12 @@ export function logout(data) {
         data
     }
 }
-
+export function addTeamInfo(data) {
+    return {
+        type: actionTypes.USERINFO_ADDTEAMINFO,
+        data
+    }
+}
 export function match(data) {
     return {
         type: actionTypes.USERINFO_MATCH,

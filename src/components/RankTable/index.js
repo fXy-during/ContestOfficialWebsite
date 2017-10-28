@@ -10,9 +10,14 @@ class RankTable extends React.Component{
     constructor(props, context){
         super(props, context);
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+        this.state = {
+          isAvailable: true, 
+        } 
     }
     handleFreshData() {
+      this.setState({isAvailable: false});
       this.props.RefreshData();
+      setTimeout(()=>{ this.setState({isAvailable: true}) }, 3500);
     }
     render(){
         const columns = [{
@@ -46,10 +51,11 @@ class RankTable extends React.Component{
           sorter: (a, b) => a.lastScore - b.lastScore,
         }]
         const { data, loading } = this.props;
+        const { isAvailable } = this.state;
         const btnStyle = { marginBottom: '2px' };
         return(
             <div className='home-section-container' style={{ backgroundColor: '#4fbab4' }}>
-            <Button style={btnStyle} loading={loading}  onClick={this.handleFreshData.bind(this)}>刷新排行</Button>
+            <Button disabled={!isAvailable} style={btnStyle} loading={loading}  onClick={this.handleFreshData.bind(this)}>刷新排行</Button>
             <Table
             pagination={
               data.length>8 ? 

@@ -28,7 +28,6 @@ class TeamInfo extends React.Component{
           </Col>
           <Col span={12}>
             <p className='teachers-text-wrap textLeft'>
-            <p className={`teacherTitle-${index}`}>{titleInfo}</p>
               {descriptionInfo}
             </p>
           </Col>

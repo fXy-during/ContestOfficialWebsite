@@ -8,6 +8,7 @@ import Category from '../../components/Category';
 import User from './subpage';
 import Logo from '../../components/Logo'
 import { bindActionCreators } from 'redux';
+import getTeamInfo from '../../fetch/getTeamInfo';
 
 import * as userInfoActionsFromOtherFile from '../../actions/userinfo.js';
 
@@ -29,12 +30,24 @@ class Header extends React.Component{
     signOutAction() {
       this.props.userinfoAction.logout();
     }
+    // 获取队伍信息
+    getTeamInfoAction() {
+      const { teamId, token } = this.props.userinfo;
+      let result = getTeamInfo('', token, teamId);
+      result.then(resp => {
+        return resp.json()
+      }).then(teamInfo => {
+        // console.log('teamInfo', teamInfo);
+        this.props.userinfoAction.addTeamInfo(teamInfo);
+      })
+    }
     render(){
         const userinfo = this.props.userinfo;
-        const username = userinfo.username || ''
+        const username = userinfo.username || '';
+        const teamInfo = userinfo.teamInfo || [];
         return(
             <div className='header-inner-container'>
-              <User username={username} signOut={this.signOutAction.bind(this)}/>
+              <User getTeamInfoAction={this.getTeamInfoAction.bind(this)} teamInfo={teamInfo} username={username} signOut={this.signOutAction.bind(this)}/>
               <Category current={this.props.current} onClickAction={this.handleClick.bind(this)}/>
               <Logo/>
             </div>
