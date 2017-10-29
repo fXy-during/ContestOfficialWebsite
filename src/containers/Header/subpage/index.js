@@ -6,7 +6,6 @@ import Login from './Login';
 import Register from './Register';
 
 
-
 import './style.less';
 class User extends React.Component{
     constructor(props, context){
@@ -15,7 +14,6 @@ class User extends React.Component{
         this.state = {
             loginVisible: false,
             registerVisible: false,
-            teamInfo: [],
         }
     }
     hideModal() {

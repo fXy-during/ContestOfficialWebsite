@@ -25,7 +25,7 @@ class Login extends React.Component{
         }
     }
     componentDidMount() {
-      let userName = getItem('bigDataMonth_userName');
+      let userName = getItem('bigDataMonth_mail');
       let passWord = getItem('bigDataMonth_passWord');
       let { setFieldsValue } = this.props.form;
       setFieldsValue({
@@ -63,7 +63,7 @@ class Login extends React.Component{
         this.props.form.validateFields((err, values) => {
           if (!err) {
             let { remember, userName, passWord } = values
-            setItem('bigDataMonth_userName', remember ? userName : '');
+            setItem('bigDataMonth_mail', remember ? userName : '');
             setItem('bigDataMonth_passWord', remember ? passWord : '');
             this.loginAction(values);
             this.changeLoginBtnLoadState(true);
@@ -103,6 +103,7 @@ class Login extends React.Component{
           let { mail, token, username, matched, teamId } = data;
           // console.log('success', data);
           // 將登录信息保存入redux
+          setItem('bigDataMonth_token', token);
           login({
             mail,
             token,
@@ -111,7 +112,7 @@ class Login extends React.Component{
             teamId,
           });
           //获取队伍信息
-          this.props.getTeamInfoAction();
+          // this.props.getTeamInfoAction();
           // 更改登陆按钮状态
           this.changeLoginBtnLoadState(false);
           message.success('Login Success');

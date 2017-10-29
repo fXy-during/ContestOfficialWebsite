@@ -22,7 +22,8 @@ class Home extends React.Component{
         super(props, context);
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
         this.state = {
-            visible: false
+            visible: false,
+            matched: false,
         }
     }
     componentDidMount() {
@@ -59,14 +60,15 @@ class Home extends React.Component{
                 console.log(resp.statusText);
                 return resp.json()
             } else {
-                return resp.text()
+                return resp.json()
             }
         }).then(info=>{
             console.log('info', info);
-            if (info==1) {
+            if (info.teamId!=undefined) {
                 message.success('Your team has been created successfully!');
                 this.props.userinfoAction.match({
                     matched: true,
+                    teamId: info.teamId,
                 })
             } else { 
                 message.error(info.msg);
@@ -92,6 +94,8 @@ class Home extends React.Component{
     //         img: '../src/static/images/award_three.jpg',
     //     },
     render(){
+        const { isMatched } = this.props.userinfo;
+        console.log('isMatched', isMatched);
         const prices = [{
             title: '樱桃（Cherry）G80-3000LXCEU-2机械键盘',
             description: '程序员的梦想，德国樱桃，历久弥新。樱桃经典之一——SINCE 1989， CHERRY G80-3000系列键盘于1989年出品，是一款销售至今任然在售的机械键盘，在电脑终端产品里堪称奇迹(￥709*2)',
@@ -126,7 +130,7 @@ class Home extends React.Component{
                      <JoinForm cb={this.hideModal.bind(this)} createTeam={this.handleCreateTeam.bind(this)}/>
                     </Modal>
 
-                    <Banner takeIn={this.handleTakeIn.bind(this)} isMatched={this.props.userinfo.matched}/>
+                    <Banner takeIn={this.handleTakeIn.bind(this)} isMatched={isMatched}/>
                     <ContestInfo />
                     <TimeLine />
                     <Prices prices={prices} />
