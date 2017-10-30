@@ -34,4 +34,5 @@ function setItemMac({username, teamId, token, matched}) {
     setItem('bigDataMonth_username', username);
     setItem('bigDataMonth_teamId', !!teamId?teamId: '');
     setItem('bigDataMonth_matched', matched);
+    setItem('bigDataMonth_lastestTime', (new Date()).getTime());
 }

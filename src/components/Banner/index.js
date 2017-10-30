@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { Button } from 'antd'
 import './style.less';
-class Logo extends React.Component{
+class Banner extends React.Component{
     handleClick() {
         this.props.takeIn();
     }
@@ -25,4 +25,4 @@ class Logo extends React.Component{
     }
 }
 
-export default Logo;
+export default Banner;

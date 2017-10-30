@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { Icon, Menu } from 'antd';
 import { hashHistory } from 'react-router';
+
 import Category from '../../components/Category';
 import User from './subpage';
 import Logo from '../../components/Logo'
@@ -22,9 +23,6 @@ class Header extends React.Component{
     constructor(props, context){
         super(props, context);
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-        this.state = {
-          teamInfo: [],
-        }
     }
     handleClick(current) {
       // this.props.onClickAction(current);
@@ -36,38 +34,38 @@ class Header extends React.Component{
     }
     // 是否面密登录
     componentDidMount() {
-      const token = getItem('bigDataMonth_token');
-      const username = getItem('bigDataMonth_username');
-      const teamId = getItem('bigDataMonth_teamId');
-      const mail = getItem('bigDataMonth_mail');
-      const matched = getItem('bigDataMonth_matched');
-      const password = getItem('bigDataMonth_passWord');
-      console.log('token', token);
-      if (token!='undefined') {
-        this.props.userinfoAction.login({
-            mail,
-            token,
-            username,
-            matched,
-            teamId,
-          });
-      }
+
     }
     // 获取队伍信息
     getTeamInfoAction() {
-      const { teamId, token } = this.props.userinfo;
+      let { teamId, token } = this.props.userinfo;
+      teamId-=0;
+      /*
+        当没有组队时。
+       */
+      if (!teamId) {
+        return
+      }
       let result = getTeamInfo('', token, teamId);
       result.then(resp => {
         return resp.json()
       }).then(teamInfo => {
         // console.log('teamInfo', teamInfo);
-        this.setState({teamInfo});
+        // 修复每次重新挂载组件都会重新的bug
+        this.props.userinfoAction.addTeamInfo(teamInfo);
+        // this.setState({teamInfo});
       })
+    }
+    componentWillUpdate(nextProps, nextState) {
+      // if (nextProps.isCreateTeam) {
+      //     this.getTeamInfoAction();
+      // }
+      // console.log('nextProps, nextState', nextProps, nextState);
     }
     render(){
         const userinfo = this.props.userinfo;
         const username = userinfo.username || '';
-        const { teamInfo } = this.state; 
+        const teamInfo = userinfo.teamInfo || []; 
         return(
             <div className='header-inner-container'>
               <User getTeamInfoAction={this.getTeamInfoAction.bind(this)} teamInfo={teamInfo} username={username} signOut={this.signOutAction.bind(this)}/>

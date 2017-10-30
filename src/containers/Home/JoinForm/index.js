@@ -50,7 +50,8 @@ class JoinForm extends React.Component{
   }
 
   handleSubmit(e) {
-    if (!confirm("Are you sure you want to create this team? You can not add any members or delete any members after creating a team")) {
+    if (!confirm(`Are you sure you want to create this team ? 
+You can not add any members or delete any members after creating a team`)) {
       return
     }
     e.preventDefault();

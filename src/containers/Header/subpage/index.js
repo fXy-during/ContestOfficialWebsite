@@ -52,9 +52,11 @@ class User extends React.Component{
       )
     }
     render(){
-        const { username, signOut, teamInfo } = this.props;
+        let { username, signOut, teamInfo } = this.props;
+        console.log('teamInfo', teamInfo);
         let teamInfoWrap = '';
         if (!!teamInfo.length) {
+          // { teamInfo } = teamInfo; 
           teamInfoWrap = (
             <section >
             <div className='teamInfo-title'>

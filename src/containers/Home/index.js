@@ -24,6 +24,7 @@ class Home extends React.Component{
         this.state = {
             visible: false,
             matched: false,
+            isCreateTeam: false,
         }
     }
     componentDidMount() {
@@ -34,9 +35,14 @@ class Home extends React.Component{
     }
     handleTakeIn() {
         const UNLOG = 'stateless';
-        const matched  = !!this.props.userinfo.token ? this.props.userinfo.matched : UNLOG;
-        console.log('matched', matched);
-        if (matched===true) {
+        let matched  = !!this.props.userinfo.token ? this.props.userinfo.matched : UNLOG;
+        console.log('matched before', matched);
+
+        if (typeof matched === 'string' && matched!==UNLOG) {
+            matched = matched === 'true' ? true : false;
+        }
+        console.log('matched after', matched);
+        if (matched==true) {
             // message.info('你已经参加了比赛');
             hashHistory.push('rank');
         } else if (matched===UNLOG) { 
@@ -60,16 +66,17 @@ class Home extends React.Component{
                 console.log(resp.statusText);
                 return resp.json()
             } else {
-                return resp.json()
+                return resp.text()
             }
         }).then(info=>{
             console.log('info', info);
-            if (info.teamId!=undefined) {
+            if (typeof info === 'string') {
                 message.success('Your team has been created successfully!');
                 this.props.userinfoAction.match({
                     matched: true,
-                    teamId: info.teamId,
+                    teamId: info-=0,
                 })
+                this.setState({isCreateTeam: true});
             } else { 
                 message.error(info.msg);
             }
@@ -94,8 +101,11 @@ class Home extends React.Component{
     //         img: '../src/static/images/award_three.jpg',
     //     },
     render(){
-        const { isMatched } = this.props.userinfo;
-        console.log('isMatched', isMatched);
+        let { matched } = this.props.userinfo;
+        if (typeof matched === 'string') {
+            matched = matched === 'true' ? true : false;
+        }
+        console.log('isMatched', matched);
         const prices = [{
             title: '樱桃（Cherry）G80-3000LXCEU-2机械键盘',
             description: '程序员的梦想，德国樱桃，历久弥新。樱桃经典之一——SINCE 1989， CHERRY G80-3000系列键盘于1989年出品，是一款销售至今任然在售的机械键盘，在电脑终端产品里堪称奇迹(￥709*2)',
@@ -116,7 +126,7 @@ class Home extends React.Component{
         return(
             <Layout>
                 <Header id='layout-header-diy'>
-                    <Head current='home'/>
+                    <Head isCreateTeam={this.state.isCreateTeam} current='home'/>
                 </Header>
                 <Content>
                     <Modal
@@ -130,7 +140,7 @@ class Home extends React.Component{
                      <JoinForm cb={this.hideModal.bind(this)} createTeam={this.handleCreateTeam.bind(this)}/>
                     </Modal>
 
-                    <Banner takeIn={this.handleTakeIn.bind(this)} isMatched={isMatched}/>
+                    <Banner takeIn={this.handleTakeIn.bind(this)} isMatched={matched}/>
                     <ContestInfo />
                     <TimeLine />
                     <Prices prices={prices} />
