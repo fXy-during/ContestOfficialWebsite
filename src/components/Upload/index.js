@@ -7,7 +7,7 @@ import './style.less';
 const { Link } = Anchor;
 const Dragger = Upload.Dragger;
 // 是否开放官网下载
-const isOpen = false;
+const isOpen = true;
 const beforeOpenInfo_download = "题目下载暂未开放，敬请等待.";
 const beforeOpenInfo_uploadFile = "文件上传功能未开放.";
 
@@ -17,14 +17,22 @@ class UploadFile extends React.Component{
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     }
     handleDownLoad() {
+      const downloadUrl = 'http://182.150.37.58:2017/passCheck/bigdata.zip';
+      const isFF = navigator.userAgent.indexOf('Firefox')>0? true: false;
+      // const 
       if (isOpen) {
-        // const downloadUrl = 'http://182.150.37.58:2017/passCheck/bigdata.zip';
-        let _a = document.createElement('a');
-        _a.href=downloadUrl;
-        _a.download = '大数据题目.rar'
-        console.log(_a);
-        _a.click();
-        _a=null;
+        if(isFF){
+          //   FF
+          window.open(downloadUrl);
+        } else {
+        //   Edge、 chrome
+          let _a = document.createElement('a');
+          _a.href=downloadUrl;
+          _a.download = '大数据题目.rar'
+          console.log(_a);
+          _a.click();
+          _a=null;
+        }
       } else {
         message.info(beforeOpenInfo_download);
       }

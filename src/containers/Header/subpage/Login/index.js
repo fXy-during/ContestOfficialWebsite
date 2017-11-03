@@ -207,7 +207,7 @@ class Login extends React.Component{
                     })(
                       <Checkbox>Remember me</Checkbox>
                     )}
-                    <Button loading={this.state.loginLoading} type="primary" htmlType="submit" className="login-form-button">
+                    <Button loading={this.state.loginLoading} type="primary" htmlType='submit' className="login-form-button">
                       Log in
                     </Button>
                     Or <a href="javascript: void(0)" style={{color: '#4f77ff'}} onClick={this.handleRegister.bind(this)}>register now!</a>

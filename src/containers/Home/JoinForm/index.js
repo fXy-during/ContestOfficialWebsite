@@ -1,7 +1,7 @@
 import  React from 'react';
 import { Link } from 'react-router';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
-import { Form, Button, Input, Icon, message, Tooltip } from 'antd';
+import { Form, Button, Input, Icon, message, Tooltip, Popconfirm } from 'antd';
 
 import './style.less';
 
@@ -35,7 +35,7 @@ class JoinForm extends React.Component{
     const keys = form.getFieldValue('keys');
     
     if (keys.length>=maxMember) {
-      message.error(`超过最大人数${maxMember}`);
+      message.error(`你最多只有一个队友`);
       console.log('keys', keys);
       return;
     }
@@ -50,10 +50,6 @@ class JoinForm extends React.Component{
   }
 
   handleSubmit(e) {
-    if (!confirm(`Are you sure you want to create this team ? 
-You can not add any members or delete any members after creating a team`)) {
-      return
-    }
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
@@ -151,15 +147,25 @@ You can not add any members or delete any members after creating a team`)) {
         </FormItem>
         {formItems}
         {
-
+          getFieldValue('keys').length===0? 
         <FormItem {...formItemLayoutWithOutLabel}>
           <Button type="dashed" onClick={this.add.bind(this)} style={{ width: '70%' }}>
             <Icon type="plus" /> Add team member
           </Button>
-        </FormItem>
+        </FormItem>:''
         }
         <FormItem {...formItemLayoutWithOutLabel}>
-          <Button type="primary" htmlType="submit">Create</Button>
+        <Popconfirm
+          okText='Yes'
+          cancelText='No'
+          title={<div>
+            <p>Are you sure you want to create this team?</p>
+            <p>You can not add any members or delete any members</p>
+            <p>after creating a team.</p></div>}
+
+          onConfirm={this.handleSubmit.bind(this)}>
+          <Button type="primary">Create</Button>
+        </Popconfirm>
         </FormItem>
       </Form>
     );

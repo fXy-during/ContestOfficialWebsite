@@ -1,7 +1,7 @@
 import  React from 'react';
 import { hashHistory } from 'react-router';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
-import { Layout, message, Modal, Button } from 'antd';
+import { Layout, message, Modal, Button, Popconfirm  } from 'antd';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as userInfoActionsFromOtherFile from '../../actions/userinfo.js';
@@ -100,6 +100,12 @@ class Home extends React.Component{
     //         description: ' AW568 机械/茶轴游戏键盘(AlienFX灯效 全键无冲 5个宏按键)黑 (价值899.00￥)',
     //         img: '../src/static/images/award_three.jpg',
     //     },
+    getTestPop() {
+        console.log('from pop');
+    }
+    getTestBtn() {
+        console.log('from Btn');
+    }
     render(){
         let { matched } = this.props.userinfo;
         if (typeof matched === 'string') {
@@ -139,7 +145,6 @@ class Home extends React.Component{
                      >
                      <JoinForm cb={this.hideModal.bind(this)} createTeam={this.handleCreateTeam.bind(this)}/>
                     </Modal>
-
                     <Banner takeIn={this.handleTakeIn.bind(this)} isMatched={matched}/>
                     <ContestInfo />
                     <TimeLine />

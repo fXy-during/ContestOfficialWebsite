@@ -17,7 +17,7 @@ class App extends React.Component {
             initDone: false,
         }
     }
-    // 免迷登录
+    // 免密登录
     componentDidMount() {
       const millisecondToHour = 1000*60*60;
       const token = getItem('bigDataMonth_token');
@@ -29,6 +29,10 @@ class App extends React.Component {
       const lastestTime = getItem('bigDataMonth_lastestTime')
       console.log('token', token);
       const isOutTime = (((new Date()).getTime() - lastestTime)/millisecondToHour)<24? true: false;
+      console.log('new Date(lastestTime)', (new Date(lastestTime)) );
+      console.log('lastestTime', lastestTime);
+      console.log('isOutTime', isOutTime);
+      console.log('toHour', ((new Date()).getTime() - lastestTime)/millisecondToHour);
       if (token!='undefined'&&isOutTime) {
         this.props.userinfoAction.login({
             mail,
