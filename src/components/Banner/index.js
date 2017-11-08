@@ -2,13 +2,14 @@ import  React from 'react';
 import { Link } from 'react-router';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { Button } from 'antd'
+import Prototype from 'prop-types'
 import './style.less';
 class Banner extends React.Component{
     handleClick() {
         this.props.takeIn();
     }
     render(){
-        const { isMatched } = this.props;
+        const { isMatched } = this.props;   
         return(
             <div id='content-banner-container'>
                 <img className='content-banner-logo' src='../src/static/images/bg_latest.png'/>
@@ -24,5 +25,16 @@ class Banner extends React.Component{
         )
     }
 }
+Banner.defaultProps = {
+    isMatched: false,
+}
+/*
 
+ */
+Banner.propTypes = {
+    // 参加比赛触发函数
+    takeIn: Prototype.func.isRequired,
+    // 是否已经组队
+    isMatched: Prototype.bool,
+}
 export default Banner;

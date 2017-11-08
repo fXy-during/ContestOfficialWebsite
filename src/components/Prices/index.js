@@ -5,6 +5,7 @@ import { Button, Row, Col} from 'antd'
 
 import PriceItem from './subpage';
 import './style.less';
+import PropTypes from 'prop-types';
 
 class Prices extends React.Component{
                             // <img className='prices-img-wordpad' src='./src/static/images/award_title_bg.png' />
@@ -41,5 +42,7 @@ class Prices extends React.Component{
         )
     }
 }
-
+Prices.propType = {
+    prices: PropTypes.arrayOf(PropTypes.Object).isRequired,
+}
 export default Prices;

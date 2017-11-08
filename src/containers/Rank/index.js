@@ -57,7 +57,10 @@ class Rank extends React.Component{
                       <img className='rank-img-bg' src='../src/static/images/info_ahead.png' />
                       <img className='rank-img-cup' src='../src/static/images/awarkCup.png'/>
                     </div>
-                    <RankTable RefreshData={this.getRankAction.bind(this)}  data={data} loading={loading}/>
+                    <RankTable 
+                        RefreshData={this.getRankAction.bind(this)}  
+                        data={data} 
+                        loading={loading}/>
                     <UploadFile mail={mail} token={token} matched={matched} />
                 </Content>
                 <Footer id='layout-footer'>

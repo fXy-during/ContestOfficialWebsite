@@ -20,6 +20,8 @@ class App extends React.Component {
     // 免密登录
     componentDidMount() {
       const millisecondToHour = 1000*60*60;
+      const GULLY = 10;
+
       const token = getItem('bigDataMonth_token');
       const username = getItem('bigDataMonth_username');
       const teamId = getItem('bigDataMonth_teamId');
@@ -28,12 +30,12 @@ class App extends React.Component {
       const password = getItem('bigDataMonth_passWord');
       const lastestTime = getItem('bigDataMonth_lastestTime')
       console.log('token', token);
-      const isOutTime = (((new Date()).getTime() - lastestTime)/millisecondToHour)<24? true: false;
+      const isOutTime = (((new Date()).getTime() - lastestTime)/millisecondToHour) < GULLY? false: true;
       console.log('new Date(lastestTime)', (new Date(lastestTime)) );
       console.log('lastestTime', lastestTime);
       console.log('isOutTime', isOutTime);
       console.log('toHour', ((new Date()).getTime() - lastestTime)/millisecondToHour);
-      if (token!='undefined'&&isOutTime) {
+      if (token!='undefined'&&!isOutTime) {
         this.props.userinfoAction.login({
             mail,
             token,

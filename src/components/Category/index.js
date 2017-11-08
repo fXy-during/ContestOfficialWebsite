@@ -2,9 +2,10 @@ import  React from 'react';
 import { Link } from 'react-router';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { Icon, Menu } from 'antd';
+import PropType from 'prop-types'
+
 const SubMenu = Menu.SubMenu;
 const MenuItem = Menu.Item;
-
 import './style.less';
 class Category extends React.Component{
     constructor(props, context){
@@ -34,9 +35,17 @@ class Category extends React.Component{
                 </MenuItem>
             </Menu>
             </div>
-
         )
     }
 }
+Category.defaultProps = {
+  current: 'home',
+}
 
+Category.propTypes = {
+  // 分页内容
+  current: PropType.oneOf(['home', 'rank', 'about']),
+  // 换页
+  onClickAction: PropType.func.isRequired,
+}
 export default Category;

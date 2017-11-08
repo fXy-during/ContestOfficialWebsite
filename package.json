@@ -31,6 +31,7 @@
     "es6-promise": "^4.1.1",
     "json-loader": "^0.5.7",
     "promise-polyfill": "^6.0.2",
+    "prop-types": "^15.6.0",
     "pubsub-js": "^1.5.4",
     "rc-queue-anim": "^1.2.3",
     "rc-scroll-anim": "^1.0.7",

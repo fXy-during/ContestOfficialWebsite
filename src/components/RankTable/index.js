@@ -2,7 +2,7 @@ import  React from 'react';
 import { Link } from 'react-router';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { Table, Button } from 'antd';
-
+import PropTypes from 'prop-types';
 
 import './style.less';
 
@@ -24,6 +24,7 @@ class RankTable extends React.Component{
             title: '排名',
             dataIndex: 'position',
             key: 'position',
+            width: '7%',
             sorter: (a, b) => a.position - b.position,
             render: (text, record) => {
               if (text<=3) {
@@ -39,7 +40,13 @@ class RankTable extends React.Component{
         },{
           title: '队伍名称',
           dataIndex: 'teamName',
-          key: 'teamName'
+          key: 'teamName',
+          width: '55%',
+          render: (text, record) => {
+            return (
+              <span className='teamname-wrap'>{text}</span>
+            )
+          }
         },{
           title: '最高得分',
           dataIndex: 'maxScore',
@@ -72,4 +79,9 @@ class RankTable extends React.Component{
     }
 }
 
+RankTable.propTypes = {
+  RefreshData: PropTypes.func.isRequired,
+  data: PropTypes.array,
+  loading: PropTypes.bool.isRequired,
+}
 export default RankTable;

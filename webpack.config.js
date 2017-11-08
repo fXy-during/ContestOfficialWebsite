@@ -81,7 +81,7 @@ module.exports = {
           // koa 代码在 ./mock 目录中，启动命令为 npm run mock
           '/dataCastle': {
             // target: 'http://localhost:3000',
-            target: 'http://182.150.37.58:9595',
+            target: 'http://182.150.37.58:2017',
             secure: false
           }
         },

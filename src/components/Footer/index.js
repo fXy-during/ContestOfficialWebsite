@@ -2,10 +2,8 @@ import React from 'react';
 import TweenOne from 'rc-tween-one';
 import OverPack from 'rc-scroll-anim/lib/ScrollOverPack';
 import './style.less'
-class Footer extends React.Component {
-  render() {
-    // const props = { this.props };
-    // delete props.isMode;
+
+function Footer(props) {
     return (<OverPack
       playScale={0.05}
       id="footer-container"
@@ -19,7 +17,6 @@ class Footer extends React.Component {
         </span>
       </TweenOne>
     </OverPack>);
-  }
 }
 
 export default Footer;

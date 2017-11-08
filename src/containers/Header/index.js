@@ -69,7 +69,9 @@ class Header extends React.Component{
         return(
             <div className='header-inner-container'>
               <User getTeamInfoAction={this.getTeamInfoAction.bind(this)} teamInfo={teamInfo} username={username} signOut={this.signOutAction.bind(this)}/>
-              <Category current={this.props.current} onClickAction={this.handleClick.bind(this)}/>
+              <Category 
+                current={this.props.current} 
+                onClickAction={this.handleClick.bind(this)}/>
               <Logo/>
             </div>
         )

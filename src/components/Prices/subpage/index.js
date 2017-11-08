@@ -3,9 +3,9 @@ import { Link } from 'react-router';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { Button, Card } from 'antd'
 import './style.less';
+import PropTypes from 'prop-types'
 
-
-class Prices extends React.Component{
+class PriceItem extends React.Component{
 
     render(){
         const numberArr = ['一', '二', '三'];
@@ -25,5 +25,12 @@ class Prices extends React.Component{
     }
 }
                 // <span className={`rank-top-${rank}`} ><img src='../src/static/images/award.png' /></span>
-
-export default Prices;
+PriceItem.propTypes = {
+    data: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        rank: PropTypes.number.isRequired,
+        description: PropTypes.string.isRequired,
+        img: PropTypes.string.isRequired,
+    }).isRequired,
+}
+export default PriceItem;
