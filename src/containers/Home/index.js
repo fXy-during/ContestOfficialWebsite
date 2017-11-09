@@ -132,7 +132,7 @@ class Home extends React.Component{
         return(
             <Layout>
                 <Header id='layout-header-diy'>
-                    <Head isCreateTeam={this.state.isCreateTeam} current='home'/>
+                    <Head current='home'/>
                 </Header>
                 <Content>
                     <Modal
@@ -143,7 +143,9 @@ class Home extends React.Component{
                       onOk={this.hideModal.bind(this)}
                       onCancel={this.hideModal.bind(this)}
                      >
-                     <JoinForm cb={this.hideModal.bind(this)} createTeam={this.handleCreateTeam.bind(this)}/>
+                     <JoinForm 
+                        cb={this.hideModal.bind(this)} 
+                        createTeam={this.handleCreateTeam.bind(this)}/>
                     </Modal>
                     <Banner takeIn={this.handleTakeIn.bind(this)} isMatched={matched}/>
                     <ContestInfo />

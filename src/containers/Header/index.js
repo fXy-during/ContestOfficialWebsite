@@ -11,6 +11,7 @@ import Logo from '../../components/Logo'
 import { bindActionCreators } from 'redux';
 import getTeamInfo from '../../fetch/getTeamInfo';
 import { getItem } from '../../util/storeUser';
+import PropTypes from 'prop-types'
 
 import * as userInfoActionsFromOtherFile from '../../actions/userinfo.js';
 
@@ -57,10 +58,6 @@ class Header extends React.Component{
       })
     }
     componentWillUpdate(nextProps, nextState) {
-      // if (nextProps.isCreateTeam) {
-      //     this.getTeamInfoAction();
-      // }
-      // console.log('nextProps, nextState', nextProps, nextState);
     }
     render(){
         const userinfo = this.props.userinfo;
@@ -68,7 +65,11 @@ class Header extends React.Component{
         const teamInfo = userinfo.teamInfo || []; 
         return(
             <div className='header-inner-container'>
-              <User getTeamInfoAction={this.getTeamInfoAction.bind(this)} teamInfo={teamInfo} username={username} signOut={this.signOutAction.bind(this)}/>
+              <User 
+                getTeamInfoAction={this.getTeamInfoAction.bind(this)} 
+                teamInfo={teamInfo} 
+                username={username} 
+                signOut={this.signOutAction.bind(this)}/>
               <Category 
                 current={this.props.current} 
                 onClickAction={this.handleClick.bind(this)}/>
@@ -77,6 +78,11 @@ class Header extends React.Component{
         )
     }
 }
+// 约束
+Header.propTypes = {
+  current: PropTypes.oneOf(['home', 'rank', 'about'])
+}
+
 
 ///  链接redux
 

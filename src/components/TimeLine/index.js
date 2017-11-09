@@ -8,10 +8,6 @@ import { Timeline } from 'antd'
 
 import './style.less';
 class TimeLine extends React.Component{
-    constructor(props, context){
-        super(props, context);
-        this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-    }
                     // <TweenOne key="0" animation={{ opacity: 1 }}
                     //   style={{ opacity: 0, marginBottom: 10 }}/>
     render(){

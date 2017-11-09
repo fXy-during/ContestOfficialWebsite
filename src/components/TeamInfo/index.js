@@ -5,11 +5,6 @@ import {  Row, Col, Button } from 'antd';
 import './style.less';
 
 class TeamInfo extends React.Component{
-    constructor(props, context){
-        super(props, context);
-        this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-    }
-
     getTeachersList(item, index){
     // 格式化教师信息
       const titleInfo = item.title.split(/\n/).filter(item => item).map((item, index)=>(
@@ -17,7 +12,7 @@ class TeamInfo extends React.Component{
 
       const descriptionInfo = item.description.split(/\n/).filter(item => item)
         .map((item, index) => (
-          <h2>{item.trim()}</h2>))
+          <h2 key={index}>{item.trim()}</h2>))
 
       return (
         index%2 === 0 ?

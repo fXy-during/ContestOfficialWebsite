@@ -61,7 +61,7 @@ class RankTable extends React.Component{
         const { isAvailable } = this.state;
         const btnStyle = { marginBottom: '2px' };
         return(
-            <div className='home-section-container' style={{ backgroundColor: '#4fbab4' }}>
+            <div className='home-section-container rank-table' style={{ backgroundColor: '#4fbab4' }}>
             <Button disabled={!isAvailable} style={btnStyle} loading={loading}  onClick={this.handleFreshData.bind(this)}>刷新排行</Button>
             <Table
             pagination={
@@ -80,8 +80,11 @@ class RankTable extends React.Component{
 }
 
 RankTable.propTypes = {
+  // 刷新表数据
   RefreshData: PropTypes.func.isRequired,
+  // 表格数据
   data: PropTypes.array,
+  // 是否处在加载状态
   loading: PropTypes.bool.isRequired,
 }
 export default RankTable;

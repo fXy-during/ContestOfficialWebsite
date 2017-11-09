@@ -2,7 +2,7 @@ import  React from 'react';
 import { Link } from 'react-router';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { Form, Button, Input, Icon, message, Tooltip, Popconfirm } from 'antd';
-
+import PropTypes from 'prop-types'
 import './style.less';
 
 
@@ -174,5 +174,11 @@ class JoinForm extends React.Component{
 
 
 const JoinFormWrap = Form.create()(JoinForm);
+JoinForm.propTypes = {
+  // 组队成功后的回调
+  cb: PropTypes.func.isRequired,
+  // 组队动作
+  createTeam: PropTypes.func.isRequired,
+}
 
 export default JoinFormWrap

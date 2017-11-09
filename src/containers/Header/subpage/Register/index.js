@@ -1,15 +1,14 @@
 import  React from 'react';
 import { Link } from 'react-router';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
-
+import PropTypes from 'prop-types';
 import { Form, Input, Tooltip, Icon, Row, Col, Button, message, Spin, notification } from 'antd';
-const FormItem = Form.Item;
-
 import register from '../../../../fetch/register';
 import getVerifyCode from '../../../../fetch/getVerifyCode';
 import mailToWebsite from '../../../../components/mailToWebsite';
 import './style.less';
 
+const FormItem = Form.Item;
 class Register extends React.Component{
     constructor(props, context){
         super(props, context);
@@ -26,6 +25,7 @@ class Register extends React.Component{
     }
     componentWillUpdate(nextProps, nextState) {
       // console.log('nextProps, nextState', nextProps, nextState);
+    // 确保每次出现注册页面都会有新的验证码出现
       if(nextProps.init&&!this.props.init) {
         this.getVerifyCodeAction();
         this.props.form.setFieldsValue({
@@ -298,5 +298,14 @@ class Register extends React.Component{
         )
     }
 }
+
 const RegisterWrap = Form.create()(Register);
+
+RegisterWrap.propTypes =  {
+  // 注册页面是否显示
+  init: PropTypes.bool,
+  // 切换至登录页面
+  onLogin: PropTypes.func,
+  // test: PropTypes.string.isRequired,
+}
 export default RegisterWrap;

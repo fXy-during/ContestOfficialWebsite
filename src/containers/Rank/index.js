@@ -61,7 +61,7 @@ class Rank extends React.Component{
                         RefreshData={this.getRankAction.bind(this)}  
                         data={data} 
                         loading={loading}/>
-                    <UploadFile mail={mail} token={token} matched={matched} />
+                    <UploadFile mail={!!mail? mail: ''} token={!!token? token: ''} matched={!!matched? true: false} />
                 </Content>
                 <Footer id='layout-footer'>
                     <Foot /> 

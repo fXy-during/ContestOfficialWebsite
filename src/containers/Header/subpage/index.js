@@ -4,7 +4,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { Icon, Button, Modal, Popover } from 'antd';
 import Login from './Login';
 import Register from './Register';
-
+import PropTypes from 'prop-types';
 
 import './style.less';
 class User extends React.Component{
@@ -98,7 +98,6 @@ class User extends React.Component{
                     <Button onClick={this.showModal.bind(this, 'registerVisible')} ghost>register</Button>
                 </span>
             }
-
             <Modal
               width='350'
               title={null}
@@ -111,7 +110,6 @@ class User extends React.Component{
                 <img className='login-logo-img' src='../src/static/images/logo.png'/>
               </p>
               <Login  
-                getTeamInfoAction={this.getTeamInfoAction.bind(this)}
                 init={this.state.loginVisible} 
                 cb={this.hideModal.bind(this)} 
                 onRegister={this.handleToRegistration.bind(this)} />
@@ -123,12 +121,24 @@ class User extends React.Component{
               onCancel={this.hideModal.bind(this)}
               footer={null}
              >
-              <Register init={this.state.registerVisible} onLogin={this.hideModal.bind(this)}/>
+              <Register 
+                init={this.state.registerVisible} 
+                onLogin={this.hideModal.bind(this)}/>
             </Modal>
             </div>
-
         )
     }
+}
+
+User.propTypes = {
+  // 获取用户信息
+  getTeamInfoAction: PropTypes.func,
+  // 队伍信息
+  teamInfo: PropTypes.array,
+  // username
+  username: PropTypes.string,
+  // 注销动作
+  signOut: PropTypes.func,
 }
 
 export default User;

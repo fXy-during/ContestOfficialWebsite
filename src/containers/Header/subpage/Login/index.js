@@ -1,11 +1,11 @@
 import  React from 'react';
-import { Link } from 'react-router';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as userInfoActionsFromOtherFile from '../../../../actions/userinfo.js';
-
+import PropTypes from 'prop-types'
 import { Form, Button, Input, Icon, Checkbox, message, Spin } from 'antd'
+
+import * as userInfoActionsFromOtherFile from '../../../../actions/userinfo.js';
 import { getItem, setItem } from '../../../../util/storeUser';
 import './style.less';
 import loginFetch from '../../../../fetch/login';
@@ -111,8 +111,6 @@ class Login extends React.Component{
             matched,
             teamId,
           });
-          //获取队伍信息
-          // this.props.getTeamInfoAction();
           // 更改登陆按钮状态
           this.changeLoginBtnLoadState(false);
           message.success('Login Success');
@@ -220,6 +218,14 @@ class Login extends React.Component{
                     // <a className="login-form-forgot" href="javascript: void(0)">Forgot passWord</a>
 const LoginWrap = Form.create()(Login);
 
+LoginWrap.propTypes = {
+  // 登录界面是否显示
+  init: PropTypes.bool,
+  // 登录成功的回调
+  cb: PropTypes.func.isRequired,
+  // 切换至注册页面
+  onRegister: PropTypes.func.isRequired,
+}
 // 链接redux
 function mapStateToProps(state) {
   return {

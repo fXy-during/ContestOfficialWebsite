@@ -1,6 +1,7 @@
 import  React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { Upload, message, Button, Icon, Anchor  } from 'antd';
+import PropTypes from 'prop-types';
 import './style.less';
 
 
@@ -131,5 +132,12 @@ class UploadFile extends React.Component{
         )
     }
 }
-
+UploadFile.defaultProps = {
+  matched: false,
+}
+UploadFile.propTypes = {
+  mail: PropTypes.string.isRequired,
+  token: PropTypes.string.isRequired,
+  matched: PropTypes.bool,
+}
 export default UploadFile;
